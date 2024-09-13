@@ -218,4 +218,23 @@ Lean Development акцентує увага на створенні ПЗ, як�
 
 ## Посилання
 
-*[Розділ містить повний список всіх документів, про які згадується.]*
+1. [Програмне забезпечення](https://apeps.kpi.ua/vidi-programnoho-zabezpechenia)
+2. [Етапи проєкту](https://icstudio.online/post/etapi-zhittyevogo-ciklu-rozrobki-pz)
+3. [FURPS](https://uk.wikipedia.org/wiki/FURPS)
+4. [Спринт](https://foxminded.ua/sprint-tse/)
+5. [Зворотний зв’язок](https://hurma.work/blog/zvorotnyj-zvyazok-spivrobitnyku/)
+6. [Вимоги до ПЗ](https://studfile.net/preview/5130988/page:2/)
+7. [Гнучкість](https://experience.dropbox.com/uk-ua/resources/agile-methodology)
+8. [Автоматизація](https://uk.wikipedia.org/wiki/%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D0%B7%D0%B0%D1%86%D1%96%D1%8F)
+9. [Прототип](https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D1%82%D0%B8%D0%BF)
+10. [Ітерація](https://uk.wikipedia.org/wiki/%D0%86%D1%82%D0%B5%D1%80%D0%B0%D1%86%D1%96%D1%8F)
+11. [Ітеративний процес у розробці ПЗ](https://easternpeak.com/definition/iterative-development/)
+12. [Методологія розробки ПЗ](https://wezom.com.ua/ua/blog/metodologija-razrabotki-programmnogo-obespechenija)
+13. [UI/UX](https://redstone.agency/blog/shcho-take-ux-ui-dysayn/)
+14. [Waterfall](https://www.atlassian.com/agile/project-management/waterfall-methodology)
+15. [Agile](https://foxminded.ua/shcho-take-agile/)
+16. [Scrum](https://brander.ua/blog/skram-shcho-tse-take-ta-yak-tsym-korystuvatysya)
+17. [Kanban](https://brainrain.com.ua/uk/shcho-take-kanban/)
+18. [Lean Development](https://qarea.com/blog/what-is-lean-software-development)
+19. [Прототипування](https://www.maxzosim.com/prototyping/)
+20. [RAD](https://uk.wikipedia.org/wiki/%D0%A8%D0%B2%D0%B8%D0%B4%D0%BA%D0%B0_%D1%80%D0%BE%D0%B7%D1%80%D0%BE%D0%B1%D0%BA%D0%B0_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B1%D0%B5%D0%B7%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8F)
