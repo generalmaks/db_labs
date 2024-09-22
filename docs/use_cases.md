@@ -21,14 +21,13 @@
     usecase "Видалити акаунт" as UC_1.3
     usecase "Редагувати дані акаунта" as UC_1.4
     
-    usecase "Управляти оптуваннями" as UC_2.1    
+    usecase "Управляти опитуваннями" as UC_2.1    
     usecase "Отримати аналітику опитування" as UC_2.4
     usecase "Переглянути створені опитування" as UC_2.5
-    usecase "Створити категорію опитувань" as UC_2.6
+    usecase "Редагувати категорії опитувань" as UC_2.6
     
     usecase "Пройти опитування" as UC_3.1
-    usecase "Переглянути пройдені опитування" as UC_3.3
-    usecase "Відфільтрувати опитування за категоріями" as UC_3.4
+    usecase "Перегляд опитувань" as UC_3.2
     
     usecase "Видалити акаунт користувача" as UC_4.1
     usecase "Зв'язатись з користувачем" as UC_4.2
@@ -49,8 +48,7 @@
     Researcher -> UC_2.6
     
     Expert --> UC_3.1
-    Expert --> UC_3.3
-    Expert -right-> UC_3.4
+    Expert --> UC_3.2
     
     
     Admin -up-> UC_4.1
@@ -90,12 +88,16 @@
     
     usecase "Отримати аналітику опитування" as UC_1.2
     usecase "Переглянути створені опитування" as UC_1.3
-    usecase "Створити категорію опитувань" as UC_1.4
+    usecase "Редагувати категорії опитувань" as UC_1.4
     
     usecase "Створити питання" as UC_1.1.1.1
     usecase "Додати категорію до опитування" as UC_1.1.1.2
+    usecase "Змінити категорію опитування" as UC_1.1.1.3
     
     usecase "Підтверити дію" as UC_1.2.1
+    
+    usecase "Створити категорію опитувань" as UC_1.4.1
+    usecase "Переглянути категорії опитувань" as UC_1.4.2
     
     Researcher -up-> UC_1.1
     Researcher -down-> UC_1.2
@@ -108,9 +110,13 @@
     
     UC_1.1.1.1 ..> UC_1.1.1 :extends
     UC_1.1.1.2 ..> UC_1.1.1 :extends
+    UC_1.1.1.3 ..> UC_1.1.1 :extends
     
     UC_1.2.1 ..> UC_1.2 :extends
     UC_1.2.1 ..> UC_1.3 :extends
+    
+    UC_1.4.1 ..> UC_1.4 :extends
+    UC_1.4.2 ..> UC_1.4 :extends
     
     right footer
         Модель прецедентів дослідника.
