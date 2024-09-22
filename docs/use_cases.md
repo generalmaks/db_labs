@@ -82,31 +82,21 @@
 ```
 
 яка буде відображена наступним чином
-
+## Загальна діаграма прецедентів
 <center style="
     border-radius:4px;
     border: 1px solid #cfd7e6;
     box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
-    padding: 1em;"
+    padding: 0em;"
     >
 
 ```plantuml
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_1.0
-    end header
-
-    title
-        <font size=16 color=black>Діаграма прецедентів
-    end title
-
-
     actor "Користувач" as User #ffed94
     actor "Дослідник" as Researcher #bffaa2
     actor "Експерт" as Expert #eacffa
     actor "Адміністратор системи" as Admin #94f1ff
-    
     
     usecase "Створити акаунт" as UC_1.1
     usecase "Увійти в акаунт" as UC_1.2  
@@ -154,16 +144,55 @@
     Admin -> UC_4.2
     
     right footer
-        Аналітичний портал. Модель прецедентів.
+        Модель прецедентів.
         НТУУ КПІ ім.І.Сікорського
-        Киів-2020
+        Киів-2024
     end footer
 
 @enduml
 ```
-
-
 **Діаграма прецедентів**
 
 </center>
 
+## Діаграми use case
+### Use case діаграма дослідника
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 0em;"
+    >
+
+```plantuml
+@startuml
+    actor "Дослідник" as Researcher #bffaa2
+    
+    usecase "Створити опитування" as UC_1.1
+    usecase "Закрити опитування" as UC_1.2
+    usecase "Видалити опитування" as UC_1.3
+    usecase "Отримати аналітику опитування" as UC_1.4
+    usecase "Переглянути створені опитування" as UC_1.5
+    usecase "Створити категорію опитувань" as UC_1.6
+    
+    usecase "Створити питання" as UC_1.1.1
+    usecase "Додати категорію до опитування" as UC_1.1.2
+    
+    usecase "Підтверити дію" as UC_1.2.1
+    
+    Researcher -up-> UC_1.1
+    Researcher -up-> UC_1.2
+    Researcher -left-> UC_1.3
+    Researcher --> UC_1.4
+    Researcher -right-> UC_1.5
+    Researcher --> UC_1.6
+    
+    UC_1.1.1 ..> UC_1.1 :extends
+    UC_1.1.2 ..> UC_1.1 :extends
+    UC_1.2.1 ..> UC_1.2 :extends
+    UC_1.2.1 ..> UC_1.3 :extends
+    
+@enduml
+```
+
+</center>
