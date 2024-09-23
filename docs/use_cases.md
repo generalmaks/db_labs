@@ -76,21 +76,21 @@ actor "Адміністратор системи" as Admin #ffed94
     Admin -right-> UC_1.2
     Admin -left-> UC_1.3
     
-    UC_1.1.1 .up.> UC_1.1
-    UC_1.1.2 .left.> UC_1.1
-    UC_1.1.3 .right.> UC_1.1
+    UC_1.1.1 .up.> UC_1.1 :extends
+    UC_1.1.2 .left.> UC_1.1 :extends
+    UC_1.1.3 .right.> UC_1.1 :extends
     
-    UC_1.2.1 ..> UC_1.2
-    UC_1.2.2 ..> UC_1.2
+    UC_1.2.1 ..> UC_1.2 :extends
+    UC_1.2.2 ..> UC_1.2 :extends
     
-    UC_1.3.1 ..> UC_1.3
-    UC_1.3.2 ..> UC_1.3
+    UC_1.3.1 ..> UC_1.3 :extends
+    UC_1.3.2 ..> UC_1.3 :extends
     
-    UC_1.2.12 ..> UC_1.2.1
-    UC_1.2.12 ..> UC_1.2.2
+    UC_1.2.12 ..> UC_1.2.1 :extends
+    UC_1.2.12 ..> UC_1.2.2 :extends
     
-    UC_1.3.12 ..> UC_1.3.1
-    UC_1.3.12 ..> UC_1.3.2
+    UC_1.3.12 ..> UC_1.3.1 :extends
+    UC_1.3.12 ..> UC_1.3.2 :extends
         
     right footer
         Модель прецедентів адміністратора системи.
@@ -127,13 +127,13 @@ actor "Експерт" as Expert #ffed94
     Expert -left-> UC_1.1
     Expert -right-> UC_1.2
     
-    UC_1.1.1 .up.> UC_1.1
-    UC_1.1.2 ..> UC_1.1
+    UC_1.1.1 .up.> UC_1.1 :extends
+    UC_1.1.2 ..> UC_1.1 :extends
     
-    UC_1.2.1 .left.> UC_1.2
+    UC_1.2.1 .left.> UC_1.2 :extends
     
-    UC_1.1.1.1 .>> UC_1.1.1
-    UC_1.1.2.1 .>> UC_1.1.2
+    UC_1.1.1.1 .>> UC_1.1.1 :extends
+    UC_1.1.2.1 .>> UC_1.1.2 :extends
         
     right footer
         Модель прецедентів експерта.
