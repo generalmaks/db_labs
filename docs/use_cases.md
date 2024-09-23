@@ -13,7 +13,7 @@
 
     actor "Користувач" as User #ffed94
     actor "Дослідник" as Researcher #bffaa2
-    actor "Респондент" as Respondent #eacffa
+    actor "Експерт" as Expert #eacffa
     actor "Адміністратор системи" as Admin #94f1ff
     
     usecase "Створити акаунт" as UC_1.1
@@ -39,7 +39,7 @@
     User --> UC_1.4
     
     Researcher --|> User 
-    Respondent --|> User
+    Expert --|> User
     Admin --|> User
     
     Researcher --> UC_2.1
@@ -47,8 +47,8 @@
     Researcher -up-> UC_2.5
     Researcher -> UC_2.6
     
-    Respondent --> UC_3.1
-    Respondent --> UC_3.2
+    Expert --> UC_3.1
+    Expert --> UC_3.2
     
     
     Admin -up-> UC_4.1
