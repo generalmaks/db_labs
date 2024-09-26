@@ -85,7 +85,6 @@ end note
 stop
 @enduml
 ```
-
 ### Діаграма активності для RemoveSurvey
 
 | ID  | <span id="RemoveSurvey">RemoveSurvey</span> |
