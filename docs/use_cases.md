@@ -146,7 +146,7 @@ skinparam defaultTextAlignment center
 |Система|
 :Система перевіряє, чи правильно введено пароль;
 note right #ff8170
-Exceptions 1
+Exception 1
 (Див. табл.)
 end note
 
