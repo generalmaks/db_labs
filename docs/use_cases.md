@@ -73,8 +73,7 @@ end note
 |Дослідник|
 :Опитування відображаються на сторінці;
 note right #ff8170
-Exception 1
-Exception 3
+Exceptions 1, 3
 (Див. табл.)
 end note
 stop
