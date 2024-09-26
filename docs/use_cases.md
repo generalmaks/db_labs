@@ -142,6 +142,10 @@ skinparam defaultTextAlignment center
 
 |Система|
 :Система перевіряє, чи правильно введено пароль;
+note right #ff8170
+Exeptions 1
+(Див. табл.)
+end note
 
 |Користувач|
 :Користувач натискає кнопку "Підтвердити";
