@@ -263,7 +263,6 @@ end note
 з закритими опитуваннями;
 stop
 @enduml
-
 ```
 
 </center>
