@@ -46,6 +46,7 @@ end note
 stop
 @enduml
 ```
+
 ### Діаграма активності для CloseSurvey
 
 | ID                | <span id="CloseSurvey">CloseSurvey</span>                                                                                                                                       |
