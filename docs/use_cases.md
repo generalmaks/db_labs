@@ -1,5 +1,124 @@
 # Розроблення функціональних вимог до системи
 
+## Загальна діаграма прецедентів
+<center>
+
+```plantuml
+@startuml
+
+    actor "Користувач" as User #ffed94
+    actor "Дослідник" as Researcher #bffaa2
+    actor "Експерт" as Expert #eacffa
+    actor "Адміністратор системи" as Admin #94f1ff
+    
+    usecase "Створити акаунт" as UC_1.1
+    usecase "Увійти в акаунт" as UC_1.2  
+    usecase "Видалити акаунт" as UC_1.3
+    usecase "Редагувати дані акаунта" as UC_1.4
+    
+    usecase "Управляти опитуваннями" as UC_2.1    
+    usecase "Отримати аналітику опитування" as UC_2.4
+    usecase "Переглянути створені опитування" as UC_2.5
+    usecase "Редагувати категорії опитувань" as UC_2.6
+    
+    usecase "Пройти опитування" as UC_3.1
+    usecase "Перегляд опитувань" as UC_3.2
+    
+    usecase "Дії з акаунтами користувачів" as UC_4.1
+    usecase "Зв'язатись з користувачем" as UC_4.2
+    usecase "Дії з опитуваннями" as UC_4.3
+
+    User --> UC_1.1
+    User --> UC_1.2
+    User --> UC_1.3
+    User --> UC_1.4
+    
+    Researcher --|> User 
+    Expert --|> User
+    Admin --|> User
+    
+    Researcher --> UC_2.1
+    Researcher -up-> UC_2.4
+    Researcher -up-> UC_2.5
+    Researcher -> UC_2.6
+    
+    Expert --> UC_3.1
+    Expert --> UC_3.2
+    
+    
+    Admin -up-> UC_4.1
+    Admin -> UC_4.2
+    Admin -up-> UC_4.3
+    
+    right footer
+        Модель прецедентів.
+        НТУУ КПІ ім.І.Сікорського
+        Киів-2024
+    end footer
+
+@enduml
+```
+**Діаграми прецедентів бізнес акторів**
+
+</center>
+
+## Діаграми use case
+### Use case діаграма дослідника
+<center>
+
+```plantuml
+@startuml
+    actor "Дослідник" as Researcher #bffaa2
+    
+    usecase "Управляти оптуваннями" as UC_1.1
+    
+    usecase "Створити опитування" as UC_1.1.1
+    usecase "Закрити опитування" as UC_1.1.2
+    usecase "Видалити опитування" as UC_1.1.3
+    
+    usecase "Отримати аналітику опитування" as UC_1.2
+    usecase "Переглянути створені опитування" as UC_1.3
+    usecase "Редагувати категорії опитувань" as UC_1.4
+    
+    usecase "Створити питання" as UC_1.1.1.1
+    usecase "Додати категорію до опитування" as UC_1.1.1.2
+    usecase "Змінити категорію опитування" as UC_1.1.1.3
+    
+    usecase "Підтверити дію" as UC_1.2.1
+    
+    usecase "Створити категорію опитувань" as UC_1.4.1
+    usecase "Переглянути категорії опитувань" as UC_1.4.2
+    
+    Researcher -up-> UC_1.1
+    Researcher -down-> UC_1.2
+    Researcher -left-> UC_1.3
+    Researcher -right-> UC_1.4
+    
+    UC_1.1.1 ..> UC_1.1 :extends
+    UC_1.1.2 ..> UC_1.1 :extends
+    UC_1.1.3 ..> UC_1.1 :extends
+    
+    UC_1.1.1.1 ..> UC_1.1.1 :extends
+    UC_1.1.1.2 ..> UC_1.1.1 :extends
+    UC_1.1.1.3 ..> UC_1.1.1 :extends
+    
+    UC_1.2.1 ..> UC_1.2 :extends
+    UC_1.2.1 ..> UC_1.3 :extends
+    
+    UC_1.4.1 ..> UC_1.4 :extends
+    UC_1.4.2 ..> UC_1.4 :extends
+    
+    right footer
+        Модель прецедентів дослідника.
+        НТУУ КПІ ім.І.Сікорського
+        Киів-2024
+    end footer
+    
+@enduml
+```
+**Діаграма прецедентів дослідника**
+
+</center>
 ### Діаграма use case для незареєстрованного користувача
 
 <center>
@@ -53,7 +172,7 @@
 
 ```plantuml
 @startuml
-actor "Адміністратор системи" as Admin #ffed94
+actor "Адміністратор системи" as Admin #94f1ff
 
     usecase "Зв'язатись з користувачем" as UC_1.1
     usecase "Дії з акаунтами \nкористувачів" as UC_1.2
@@ -111,7 +230,7 @@ actor "Адміністратор системи" as Admin #ffed94
 
 ```plantuml
 @startuml
-actor "Експерт" as Expert #ffed94
+actor "Експерт" as Expert #eacffa
 
     usecase "Пройти опитування" as UC_1.1
     usecase "Перегляд опитувань" as UC_1.2
