@@ -1,12 +1,33 @@
 # Розроблення функціональних вимог до системи
+У цьому розділі містяться діаграми прецедентів, зокрема загальна та конкретизовані, і діаграми активностей. 
+Діаграми було побудовано з урахуванням розроблених характеристик ділових процесів та функціональних вимог, що містяться в [Запитах зацікавлених осіб](./stakeholders-needs.md)
+
+## Короткий зміст
+1. [Діаграма use case для всіх бізнес акторів](#GeneralUseCase)
+2. [Діаграма use case для користувача](#UserUseCase)
+3. [Діаграма use case дослідника](#ResearcherUseCase)
+4. [Діаграма use case для експерта](#ExpertUseCase)
+5. [Діаграма use case для адміністратора](#AdminUseCase)
+6. [Діаграма активності для CreateUserAccount](#CreateUserAccount)
+7. [Діаграма активності для ChangeUserData](#ChangeUserData)
+8. [Діаграма активності для RemoveUserAccount](#RemoveUserAccount)
+9. [Діаграма активності для CreateSurvey](#CreateSurvey)
+10. [Діаграма активності для CloseSurvey](#CloseSurvey)
+11. [Діаграма активності для RemoveSurvey](#RemoveSurvey)
+12. [Діаграма активності для GetSurveyAnalytics](#GetSurveyAnalytics)
+13. [Діаграма активності для ShowCreatedSurveys](#ShowCreatedSurveys)
+14. [Діаграма активності для TakeSurvey](#TakeSurvey)
+15. [Діаграма активності для ChangeAnswer](#ChangeAnswer)
+16. [Діаграма активності для ShowTakenSurveys](#ShowTakenSurveys)
 
 ## Діаграми прецедентів бізнес акторів
 
+**Діаграма прецидентів _(діаграма use case_)** - діаграма, що показує різноманітні сценарії взаємодії 
+між акторами (користувачами) та прецидентами (випадками використання). [[1]]((https://lvivqaclub.blogspot.com/2008/10/use-case-uml-diagram.html)) [[2]](https://dou.ua/forums/topic/40575/)
 
 <center>
 
-
-### <span id="generalUseCase">Use case діаграма для всіх бізнес акторів</span>
+### <span id="GeneralUseCase">Діаграма use case для всіх бізнес акторів</span>
 
 ```plantuml
 @startuml
@@ -68,8 +89,7 @@
 
 <center>
 
-<span id="#userUseCase"></span>
-### Діаграма use case для користувача
+### <span id="UserUseCase">Діаграма use case для користувача</span>
 
 ```plantuml
 @startuml
@@ -114,8 +134,7 @@
 
 <center>
 
-<span id="#researcherUseCase"></span>
-### Use case діаграма дослідника
+### <span id="ResearcherUseCase">Діаграма use case дослідника</span>
 
 ```plantuml
 @startuml
@@ -172,8 +191,7 @@
 
 <center>
 
-<span id="#expertUseCase"></span>
-### Діаграма use case для експерта
+### <span id="ExpertUseCase">Діаграма use case для експерта</span>
 
 ```plantuml
 @startuml
@@ -214,7 +232,7 @@ actor "Експерт" as Expert #eacffa
 
 <center>
 
-### Діаграма use case для адміністратора
+### <span id="AdminUseCase">Діаграма use case для адміністратора</span>
 
 ```plantuml
 @startuml
@@ -269,11 +287,13 @@ actor "Адміністратор системи" as Admin #94f1ff
 </center>
 
 
-## Діаграми активностей
+## Діаграми діяльностей
+**Діаграма діяльності _(activity діаграма)_** - діаграма, що візуалізує процес використання та ілюструє потік повідомлень від 
+однієї дії до іншої. [[2]](https://dou.ua/forums/topic/40575/)
 
 <center>
 
-### Діаграма активності для CreateUserAccount
+### <span id="#CreateUserAccount">Діаграма діяльності для CreateUserAccount</span>
 | ID  | <span id="CreateUserAccount">CreateUserAccount</span>                                                                                                                                                    |
 | :------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | НАЗВА | Створити акаунт користувача                                                                                                                                                                              |
@@ -321,7 +341,7 @@ stop
 @enduml
 ```
 
-### Діаграма активності для ChangeUserData
+### <span id="#ChangeUserData">Діаграма діяльності для ChangeUserData</span>
 
 
 | ID  | <span id="ChangeUserData">ChangeUserData</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -380,7 +400,7 @@ stop
 @enduml
 ```
 
-### Діаграма активності для RemoveUserAccount
+### <span id="#RemoveUserAccount">Діаграма діяльності для RemoveUserAccount</span>
 | ID  | <span id="RemoveUserAccount">RemoveUserAccount</span>                                                                                                                                                                                                                                                                                                                                                                               |
 | :------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | НАЗВА | Видалити акаунт користувача                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -433,7 +453,7 @@ stop
 
 <center>
 
-### Діаграма активності для CreateSurvey
+### <span id="#CreateSurvey">Діаграма діяльності для CreateSurvey</span>
 
 | ID  | <span id="CreateSurvey">CreateSurvey</span>                                                                                                                                                   |
 | :------------- |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -475,7 +495,7 @@ stop
 @enduml
 ```
 
-### Діаграма активності для CloseSurvey
+### <span id="#CloseSurvey">Діаграма діяльності для CloseSurvey</span>
 
 | ID                | <span id="CloseSurvey">CloseSurvey</span>                                                                                                                                       |
 |:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -519,7 +539,7 @@ stop
 @enduml
 ```
 
-### Діаграма активності для RemoveSurvey
+### <span id="#RemoveSurvey">Діаграма діяльності для RemoveSurvey</span>
 
 | ID  | <span id="RemoveSurvey">RemoveSurvey</span>                                                                                                                                      |
 | :------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -566,7 +586,7 @@ stop
 
 <center>
 
-### Діаграма активності для GetSurveyAnalytics
+### <span id="#GetSurveyAnalytics">Діаграма діяльності для GetSurveyAnalytics</span>
 
 | ID  | <span id="GetSurveyAnalytics">GetSurveyAnalytics</span>                                          |
 | :------------- |:-------------------------------------------------------------------------------------------------|
@@ -606,7 +626,7 @@ stop
 
 <center>
 
-### Діаграма активності для ShowCreatedSurveys
+### <span id="#ShowCreatedSurveys">Діаграма діяльності для ShowCreatedSurveys</span>
 
 | ID  | <span id="ShowCreatedSurveys">ShowCreatedSurveys</span>                                                                                                                                   |
 | :------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -649,7 +669,7 @@ stop
 
 <center>
 
-### Діаграма активності для TakeSurvey
+### <span id="#TakeSurvey">Діаграма діяльності для TakeSurvey</span>
 | ID  | <span id="TakeSurvey">TakeSurvey</span>                                                                                                                                                                                                                                 |
 | :------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | НАЗВА | Отримати аналітику опитування                                                                                                                                                                                                                                           |
@@ -714,7 +734,7 @@ stop
 
 <center>
 
-### Діаграма активності для ChangeAnswer
+### <span id="#ChangeAnswer">Діаграма діяльності для ChangeAnswer</span>
 | ID  | <span id="ChangeAnswer">ChangeAnswer</span>                                                                                                                                    |
 | :------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | НАЗВА | Отримати аналітику опитування                                                                                                                                                  |
@@ -772,7 +792,7 @@ stop
 
 <center>
 
-### Діаграма активності для ShowTakenSurveys
+### <span id="#ShowTakenSurveys">Діаграма діяльності для ShowTakenSurveys</span>
 
 | ID  | <span id="ShowTakenSurveys">ShowTakenSurveys</span>  |
 | :------------- |:-----------------------------------------------------|
@@ -812,4 +832,7 @@ stop
 
 </center>
 
+## Посилання
 
+1. [Діаграми Прецедентів (Use Case UML Diagram)](https://lvivqaclub.blogspot.com/2008/10/use-case-uml-diagram.html)
+2. [Як будувати UML-діаграми. Розбираємо три найпопулярніші варіанти](https://dou.ua/forums/topic/40575/)
