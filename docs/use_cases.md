@@ -5,7 +5,8 @@
 
 <center>
 
-### Use case діаграма для всіх бізнес акторів
+
+### <span id="#generalUseCase">Use case діаграма для всіх бізнес акторів</span>
 
 ```plantuml
 @startuml
@@ -67,7 +68,8 @@
 
 <center>
 
-### Діаграма use case для незареєстрованного користувача
+<span id="#userUseCase"></span>
+### Діаграма use case для користувача
 
 ```plantuml
 @startuml
@@ -112,6 +114,7 @@
 
 <center>
 
+<span id="#researcherUseCase"></span>
 ### Use case діаграма дослідника
 
 ```plantuml
@@ -169,6 +172,7 @@
 
 <center>
 
+<span id="#expertUseCase"></span>
 ### Діаграма use case для експерта
 
 ```plantuml
