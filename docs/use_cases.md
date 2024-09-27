@@ -6,7 +6,7 @@
 <center>
 
 
-### <span id="#generalUseCase">Use case діаграма для всіх бізнес акторів</span>
+### <span id="generalUseCase">Use case діаграма для всіх бізнес акторів</span>
 
 ```plantuml
 @startuml
