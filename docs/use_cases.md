@@ -203,22 +203,20 @@ actor "Експерт" as Expert #eacffa
 
     usecase "Пройти опитування" as UC_1.1
     usecase "Перегляд опитувань" as UC_1.2
+    usecase "Обрати категорію експертизи" as UC_1.3
     
     usecase "Завершити опитування" as UC_1.1.1
     usecase "Змінити відповідь" as UC_1.1.2
-    
-    usecase "Відфільтрувати опитування" as UC_1.2.1
     
     usecase "Підтвердити дію" as UC_1.1.1.1
     usecase "Зберегти" as UC_1.1.2.1
     
     Expert -left-> UC_1.1
     Expert -right-> UC_1.2
+    Expert --> UC_1.3
     
     UC_1.1.1 .up.> UC_1.1 :extends
     UC_1.1.2 ..> UC_1.1 :extends
-    
-    UC_1.2.1 .left.> UC_1.2 :extends
     
     UC_1.1.1.1 .>> UC_1.1.1 :extends
     UC_1.1.2.1 .>> UC_1.1.2 :extends
