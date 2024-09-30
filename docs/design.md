@@ -10,43 +10,43 @@
 ```plantuml
 @startuml
 
-entity User
-entity User.id
-entity User.first_name
-entity User.last_name
-entity User.email
-entity User.phone_number
-entity User.password
-entity User.expertise_rate
-entity User.role_id
-entity User.category_id
+entity User #aaffaa
+entity User.id #aaffaa
+entity User.first_name #aaffaa
+entity User.last_name #aaffaa
+entity User.email #aaffaa
+entity User.phone_number #aaffaa
+entity User.password #aaffaa
+entity User.expertise_rate #aaffaa
+entity User.role_id #aaffaa
+entity User.category_id #aaffaa
 
-User.id --* User
-User.first_name --* User
-User.last_name --* User
-User.email --* User
-User.phone_number --* User
-User.password --* User
-User.expertise_rate --* User
-User.role_id --* User
-User.category_id --* User
+User.id -d-* User 
+User.first_name -d-* User
+User.last_name -d-* User
+User.email -d-* User
+User.phone_number -d-* User
+User.password -d-* User
+User.expertise_rate -d-* User
+User.role_id -d-* User
+User.category_id -d-* User
 
-entity Role
-entity Role.id
-entity Role.name
+entity Role #FFDAB9
+entity Role.id #FFDAB9
+entity Role.name #FFDAB9
 
 Role.id --* Role
 Role.name --* Role
 
-entity Survey
-entity Survey.id
-entity Survey.title
-entity Survey.description
-entity Survey.creation_time
-entity Survey.close_time
-entity Survey.is_changeable
-entity Survey.category_id
-entity Survey.owner_id
+entity Survey #ADD8E6
+entity Survey.id #ADD8E6
+entity Survey.title #ADD8E6
+entity Survey.description #ADD8E6
+entity Survey.creation_time #ADD8E6
+entity Survey.close_time #ADD8E6
+entity Survey.is_changeable #ADD8E6
+entity Survey.category_id #ADD8E6
+entity Survey.owner_id #ADD8E6
 
 Survey.id -u-* Survey
 Survey.title -u-* Survey
@@ -57,36 +57,40 @@ Survey.close_time -u-* Survey
 Survey.is_changeable -u-* Survey
 Survey.owner_id -u-* Survey
 
-entity Question
-entity Question.id
-entity Question.header
-entity Question.description
-entity Question.survey_id
+entity Question #D8BFD8
+entity Question.id #D8BFD8
+entity Question.header #D8BFD8
+entity Question.description #D8BFD8
+entity Question.survey_id #D8BFD8
 
 Question.id --* Question
 Question.header --* Question
 Question.description --* Question
 Question.survey_id --* Question
 
-entity Answer
-entity Answer.id
-entity Answer.content
-entity Answer.question_id
+entity Answer #FFC0CB
+entity Answer.id #FFC0CB
+entity Answer.content #FFC0CB
+entity Answer.question_id #FFC0CB
 
-Answer.id --* Answer
-Answer.content --* Answer
-Answer.question_id --* Answer
+Answer.id -d-* Answer 
+Answer.content -r-* Answer
+Answer.question_id -u-* Answer
 
-entity Category
-entity Category.id
-entity Category.name
+entity Category #FFCC00
+entity Category.id #FFCC00
+entity Category.name #FFCC00
 
-Category.id --* Category
-Category.name --* Category
+Category.id -l-* Category
+Category.name -l-* Category
 
-User "1" -- "0..*" Survey
-User "1" -- "1" Role
-User "1" -- "0..*" Category
+User "1  " -- "0..*" Survey
+User "1                         " -l- "1" Role
+User "1" -- "0..* " Category
+Question "1..*" -r- "1" Survey
+Answer "1..10" -r- "1" Question
+Category "1..*  " -- "  0..*" Survey
+  
 
 @enduml
 ```
