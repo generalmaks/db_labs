@@ -106,15 +106,15 @@ left to right direction
   }
   
   entity "User" {
-    + id: INT
-    + role_id: INT
-    + category_id: INT 
-    + expertise_rate: INT
+    + id: INT 
     + first_name: VARCHAR
     + last_name: VARCHAR
     + email: VARCHAR
     + phone_number: VARCHAR
     + password: VARCHAR
+    + expertise_rate: DOUBLE
+    + role_id: INT
+    + category_id: INT
   }
   
   entity "Category" {
@@ -124,34 +124,34 @@ left to right direction
   
   entity "Survey" {
     + id: INT
-    + category_id: INT
-    + owner_id: INT
-    + description: TEXT
     + title: VARCHAR
+    + description: TEXT
     + creation_time: DATETIME 
     + close_time: DATETIME
     + is_changeable: BOOLEAN
+    + category_id: INT 
+    + owner_id: INT
   }
   
   entity "Questions" {
     + id: INT
-    + survey_id: INT    
-    + description: TEXT
     + header: VARCHAR
+    + description: TEXT
+    + survey_id: INT
   }
   
   entity "Answers" {
     + id: INT
-    + question_id: INT
     + content: TEXT
+    + question_id: INT
   }
   
-  "User" -- "Role"
-  "User" -- "Category"
-  "User" -- "Survey"
-  "Survey" -- "Questions"
-  "Questions" -- "Answers"
-  "Survey" -- "Category"
+  "User" ||--|| "Role"
+  "User" ||--o{ "Category"
+  "User" ||--o{ "Survey"
+  "Questions" ||--o{ "Survey"
+  "Questions" ||--o{ "Answers"
+  "Survey" ||--o{ "Category"
 
 @enduml
 ```
