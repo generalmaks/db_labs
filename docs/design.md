@@ -149,10 +149,9 @@ left to right direction
   "User" ||--|| "Role"
   "User" ||--o{ "Category"
   "User" ||--o{ "Survey"
-  "Questions" ||--o{ "Survey"
-  "Questions" ||--o{ "Answers"
-  "Survey" ||--o{ "Category"
-
+  "Survey" ||--|{ "Questions"
+  "Questions" ||--|{ "Answers"
+  "Survey" }o--|{ "Category"
 @enduml
 ```
 
