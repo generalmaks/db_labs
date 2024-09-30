@@ -89,7 +89,7 @@ User "1                         " -l- "1" Role
 User "1" -- "0..* " Category
 Question "1..*" -r- "1" Survey
 Answer "1..10" -r- "1" Question
-Category "1..*  " -- "  0..*" Survey
+Category "1..*  " -- "                                  0..*" Survey
   
 
 @enduml
