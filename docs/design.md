@@ -98,47 +98,46 @@ Category "1..*  " -- "                                  0..*" Survey
 ```plantuml
 @startuml
 
-package "?" {
+left to right direction
   
   entity "Role" {
     + id: INT
-    + name: TEXT
+    + name: VARCHAR
   }
   
   entity "User" {
     + id: INT
     + role_id: INT
     + category_id: INT 
-    + first_name: TEXT
-    + last_name: TEXT
-    + email: TEXT
-    + phone_number: TEXT
-    + password: TEXT
-    + expertise_rate: TEXT
-  
+    + expertise_rate: INT
+    + first_name: VARCHAR
+    + last_name: VARCHAR
+    + email: VARCHAR
+    + phone_number: VARCHAR
+    + password: VARCHAR
   }
   
   entity "Category" {
     + id: INT
-    + name: TEXT
+    + name: VARCHAR
   }
   
   entity "Survey" {
     + id: INT
     + category_id: INT
     + owner_id: INT
-    + creation_time: INT 
-    + close_time: INT
-    + title: TEXT
     + description: TEXT
+    + title: VARCHAR
+    + creation_time: DATETIME 
+    + close_time: DATETIME
     + is_changeable: BOOLEAN
   }
   
   entity "Questions" {
     + id: INT
-    + survey_id: INT
-    + header: TEXT
+    + survey_id: INT    
     + description: TEXT
+    + header: VARCHAR
   }
   
   entity "Answers" {
@@ -152,6 +151,7 @@ package "?" {
   "User" -- "Survey"
   "Survey" -- "Questions"
   "Questions" -- "Answers"
+  "Survey" -- "Category"
 
 @enduml
 ```
