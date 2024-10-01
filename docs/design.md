@@ -45,6 +45,7 @@ entity Survey.description #ADD8E6
 entity Survey.creation_time #ADD8E6
 entity Survey.close_time #ADD8E6
 entity Survey.is_changeable #ADD8E6
+entity Survey.is_active #ADD8E6
 entity Survey.category_id #ADD8E6
 entity Survey.owner_id #ADD8E6
 
@@ -55,6 +56,7 @@ Survey.description -u-* Survey
 Survey.creation_time -u-* Survey
 Survey.close_time -u-* Survey
 Survey.is_changeable -u-* Survey
+Survey.is_active -u-* Survey
 Survey.owner_id -u-* Survey
 
 entity Question #D8BFD8
@@ -129,6 +131,7 @@ left to right direction
     + creation_time: DATETIME 
     + close_time: DATETIME
     + is_changeable: BOOLEAN
+    + is_active: BOOLEAN
     + category_id: INT 
     + owner_id: INT
   }
