@@ -149,8 +149,8 @@ left to right direction
     + question_id: INT
   }
   
-  "User" ||--|| "Role"
-  "User" ||--o{ "Category"
+  "User" ||--|{ "Role"
+  "User" }o--o{ "Category"
   "User" ||--o{ "Survey"
   "Survey" ||--|{ "Questions"
   "Questions" ||--|{ "Answers"
