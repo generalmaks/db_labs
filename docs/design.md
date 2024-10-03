@@ -136,8 +136,8 @@ left to right direction
     + description: TEXT
     + creation_time: DATETIME 
     + close_time: DATETIME
-    + is_changeable: BOOLEAN
-    + is_active: BOOLEAN
+    + is_changeable: TINYINT
+    + is_active: TINYINT
     + category_id: INT 
     + owner_id: INT
   }
