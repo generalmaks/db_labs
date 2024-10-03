@@ -157,5 +157,6 @@ left to right direction
   "Survey" }o--|{ "Category"
 @enduml
 ```
+![Реляційна схема](https://github.com/user-attachments/assets/2e31fd4d-6137-484f-8565-f9547ea4ec5d)
 
 
