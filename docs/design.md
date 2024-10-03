@@ -8,7 +8,7 @@
  
 <span id="BusinessObjectsModel"></span>
 ## Модель бізнес-об'єктів
-**Модель бізнес-об'єктів** - це опис системи, в рамках якої відображаються всі об’єкти (сутності). [[1]](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
+**Модель бізнес-об'єктів** - це опис системи, в рамках якої відображаються всі об’єкти (сутності) даної системи. [[1]](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
 
 ```plantuml
 @startuml
