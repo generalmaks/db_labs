@@ -1,11 +1,14 @@
 # Проєктування бази даних
 
-В рамках проєкту розробляється: 
-- модель бізнес-об'єктів 
-- ER-модель
-- реляційна схема
+## Короткий зміст: 
+- [модель бізнес-об'єктів](#BusinessObjectsModel)
+- [ER-модель](#ERModel)
+- [реляційна схема](#RelationalSchema)
 
+ 
+<span id="BusinessObjectsModel"></span>
 ## Модель бізнес-об'єктів
+**Модель бізнес-об'єктів** - це опис системи, в рамках якої відображаються всі об’єкти (сутності). [[1]](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
 
 ```plantuml
 @startuml
@@ -96,6 +99,9 @@ Category "1..*  " -- "                                  0..*" Survey
 
 @enduml
 ```
+<span id="ERModel"></span>
+## ER-модель
+**ER-модель** описує сутності системи та визначає зв'язки між ними. [[2]](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
 
 ```plantuml
 @startuml
@@ -157,6 +163,14 @@ left to right direction
   "Survey" }o--|{ "Category"
 @enduml
 ```
+
+<span id="RelationalSchema"></span>
+## Реляційна схема
+**Реляційна схема** - це набір таблиць, кожна з яких відповідає за одну з сутностей реляційної бази даних, та зв'язків між ними. Реляційна схема використовується для представлення реляційної бази даних. [[3]](https://www.sciencedirect.com/topics/computer-science/relational-schema#:~:text=A%20relational%20schema%20is%20a,applications%20belong%20to%20one%20schema.)
+
 ![Реляційна схема](https://github.com/user-attachments/assets/2e31fd4d-6137-484f-8565-f9547ea4ec5d)
 
-
+## Посилання
+1. [Бізнес-моделі підприємства: еволюція та класифікація](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
+2. [Entity–relationship model](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
+3. [Relational Schemas](https://www.sciencedirect.com/topics/computer-science/relational-schema#:~:text=A%20relational%20schema%20is%20a,applications%20belong%20to%20one%20schema.)
