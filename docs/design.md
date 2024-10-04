@@ -89,13 +89,23 @@ entity Category.name #FFCC00
 Category.id -l-* Category
 Category.name -l-* Category
 
+entity SelectedAnswer
+entity SelectedAnswer.id
+entity SelectedAnswer.user_id
+entity SelectedAnswer.answer_id
+
+SelectedAnswer.id --* SelectedAnswer
+SelectedAnswer.user_id --* SelectedAnswer
+SelectedAnswer.answer_id --* SelectedAnswer
+
 User "1  " -- "0..*" Survey
 User "1                         " -l- "1..*" Role
 User "0..*" -- "0..* " Category
 Question "1..*" -r- "1" Survey
 Answer "1..10" -r- "1" Question
 Category "1..*  " -- "                                  0..*" Survey
-  
+User "1" -- "0..*"  SelectedAnswer
+Answer "1" -- "0..*" SelectedAnswer
 
 @enduml
 ```
