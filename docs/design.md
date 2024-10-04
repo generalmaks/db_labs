@@ -73,10 +73,10 @@ Question.header --* Question
 Question.description --* Question
 Question.survey_id --* Question
 
-entity Answer #FFC0CB
-entity Answer.id #FFC0CB
-entity Answer.content #FFC0CB
-entity Answer.question_id #FFC0CB
+entity Answer #1ee8a4
+entity Answer.id #1ee8a4
+entity Answer.content #1ee8a4
+entity Answer.question_id #1ee8a4
 
 Answer.id -d-* Answer 
 Answer.content -r-* Answer
@@ -86,13 +86,13 @@ entity Category #FFCC00
 entity Category.id #FFCC00
 entity Category.name #FFCC00
 
-Category.id -l-* Category
-Category.name -l-* Category
+Category.id --* Category
+Category.name -* Category
 
-entity SelectedAnswer
-entity SelectedAnswer.id
-entity SelectedAnswer.user_id
-entity SelectedAnswer.answer_id
+entity SelectedAnswer #FFC0CB
+entity SelectedAnswer.id #FFC0CB
+entity SelectedAnswer.user_id #FFC0CB
+entity SelectedAnswer.answer_id #FFC0CB
 
 SelectedAnswer.id --* SelectedAnswer
 SelectedAnswer.user_id --* SelectedAnswer
@@ -101,8 +101,8 @@ SelectedAnswer.answer_id --* SelectedAnswer
 User "1  " -- "0..*" Survey
 User "1                         " -l- "1..*" Role
 User "0..*" -- "0..* " Category
-Question "1..*" -r- "1" Survey
-Answer "1..10" -r- "1" Question
+Question "1..*" -- "1" Survey
+Answer "1..10" -- "1" Question
 Category "1..*  " -- "                                  0..*" Survey
 User "1" -- "0..*"  SelectedAnswer
 Answer "1" -- "0..*" SelectedAnswer
