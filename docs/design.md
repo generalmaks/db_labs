@@ -20,7 +20,6 @@ entity User.last_name <<TEXT>> #aaffaa
 entity User.email <<TEXT>> #aaffaa
 entity User.phone_number <<TEXT>> #aaffaa
 entity User.password <<TEXT>> #aaffaa
-entity User.role_id <<NUMBER>> #aaffaa
 
 User.id --* User 
 User.first_name --* User
@@ -28,14 +27,30 @@ User.last_name --* User
 User.email --* User
 User.phone_number --* User
 User.password --* User
-User.role_id --* User
 
-entity Role <<ENTITY>> #f59e51
-entity Role.id <<NUMBER>> #FFDAB9
-entity Role.name <<TEXT>> #FFDAB9
+entity Researcher <<ENTITY>> 
+entity Researcher.id <<NUMBER>> 
+entity Researcher.company <<TEXT>> 
 
-Role.id --* Role
-Role.name --* Role
+entity Expert <<ENTITY>> 
+entity Expert.id <<NUMBER>> 
+entity Expert.description <<TEXT>> 
+entity Expert.age <<NUMBER>> 
+entity Expert.gender <<TEXT>> 
+
+entity SurveyComplaint <<ENTITY>> 
+entity SurveyComplaint.id <<NUMBER>> 
+entity SurveyComplaint.description <<TEXT>> 
+entity SurveyComplaint.date <<DATE>> 
+entity SurveyComplaint.researcher_id <<NUMBER>> 
+entity SurveyComplaint.survey_id <<NUMBER>> 
+
+entity ExpertComplaint <<ENTITY>> 
+entity ExpertComplaint.id <<NUMBER>> 
+entity ExpertComplaint.description <<TEXT>> 
+entity ExpertComplaint.date <<DATE>> 
+entity ExpertComplaint.researcher_id <<NUMBER>> 
+entity ExpertComplaint.expert_id <<NUMBER>> 
 
 entity Survey <<ENTITY>> #448094
 entity Survey.id <<NUMBER>> #ADD8E6
@@ -105,7 +120,6 @@ Expertise.expertise_rate --* Expertise
 
 
 User "1  " -- "0..*" Survey
-User "1                         " -l- "1..*" Role
 User "0..*" -- "0..* " Category
 Question "1..*" -- "1" Survey
 Answer "1..10" -- "1" Question
