@@ -20,6 +20,7 @@ entity User.last_name <<TEXT>> #aaffaa
 entity User.email <<TEXT>> #aaffaa
 entity User.phone_number <<TEXT>> #aaffaa
 entity User.password <<TEXT>> #aaffaa
+entity User.is_admin <<NUMBER>> #aaffaa
 
 User.id --* User 
 User.first_name --* User
@@ -27,24 +28,29 @@ User.last_name --* User
 User.email --* User
 User.phone_number --* User
 User.password --* User
+User.is_admin --* User
 
 entity Researcher <<ENTITY>> #0044b0
 entity Researcher.id <<NUMBER>> #699ff5
 entity Researcher.company <<TEXT>> #699ff5
+entity Researcher.user_id <<NUMBER>> #699ff5
 
 Researcher.id --* Researcher
 Researcher.company --* Researcher
+Researcher.user_id --* Researcher
 
 entity Expert <<ENTITY>> #c20000
 entity Expert.id <<NUMBER>> #ffa6a6
 entity Expert.description <<TEXT>> #ffa6a6
 entity Expert.age <<NUMBER>> #ffa6a6
 entity Expert.gender <<TEXT>> #ffa6a6
+entity Expert.user_id <<NUMBER>> #ffa6a6
 
 Expert.id --* Expert
 Expert.description --* Expert
 Expert.age --* Expert
 Expert.gender --* Expert
+Expert.user_id --* Expert
 
 entity SurveyComplaint <<ENTITY>> #f59e51
 entity SurveyComplaint.id <<NUMBER>> #FFDAB9
@@ -139,15 +145,21 @@ Expertise.category_id --* Expertise
 Expertise.expertise_rate --* Expertise
 
 
-User "1  " -- "0..*" Survey
-User "0..*" -- "0..* " Category
-Question "1..*" -- "1" Survey
-Answer "1..10" -- "1" Question
-Category "1..*  " -- "                                  0..*" Survey
-User "1" -- "0..*"  SelectedAnswer
-Answer "1" -- "0..*" SelectedAnswer
-Expertise "0..*" -- "0..1" User
-Expertise "1..*" -- "0..1" Category
+User "1  " -- "0" Researcher
+User "1  " -- "0" Expert
+Researcher "1, 1" -- "0 .. *" Survey
+Researcher "1, 1" -- "0 .. *" SurveyComplaint
+Researcher "1, 1" -- "0 .. *" ExpertComplaint
+Survey "1, 1" -- "1 .. *" Question
+Survey "0 .. *" -- "1 .. *" Category
+Survey "1 .. 1" -- "0 .. *" SurveyComplaint
+Question "1, 1" -- "1 .. 10" Answer
+Answer "1 .. *" -- "1, 1" SelectedAnswer
+SelectedAnswer "1, 1" -- "1 .. *" Expert
+Expert "0 .. *" -- "1 .. *" Category
+Expert "0 .. 1" -- "0 .. *" ExpertComplaint
+Expert "1 .. *" -- "1, 1" Expertise
+Expertise "1, 1" -- "0 .. *" Category
 
 @enduml
 ```
