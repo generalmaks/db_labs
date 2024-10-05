@@ -32,11 +32,19 @@ entity Researcher <<ENTITY>>
 entity Researcher.id <<NUMBER>> 
 entity Researcher.company <<TEXT>> 
 
+Researcher.id --* Researcher
+Researcher.company --* Researcher
+
 entity Expert <<ENTITY>> 
 entity Expert.id <<NUMBER>> 
 entity Expert.description <<TEXT>> 
 entity Expert.age <<NUMBER>> 
 entity Expert.gender <<TEXT>> 
+
+Expert.id --* Expert
+Expert.description --* Expert
+Expert.age --* Expert
+Expert.gender --* Expert
 
 entity SurveyComplaint <<ENTITY>> 
 entity SurveyComplaint.id <<NUMBER>> 
@@ -45,12 +53,24 @@ entity SurveyComplaint.date <<DATE>>
 entity SurveyComplaint.researcher_id <<NUMBER>> 
 entity SurveyComplaint.survey_id <<NUMBER>> 
 
+SurveyComplaint.id --* SurveyComplaint
+SurveyComplaint.description --* SurveyComplaint
+SurveyComplaint.date --* SurveyComplaint
+SurveyComplaint.researcher_id --* SurveyComplaint
+SurveyComplaint.survey_id --* SurveyComplaint
+
 entity ExpertComplaint <<ENTITY>> 
 entity ExpertComplaint.id <<NUMBER>> 
 entity ExpertComplaint.description <<TEXT>> 
 entity ExpertComplaint.date <<DATE>> 
 entity ExpertComplaint.researcher_id <<NUMBER>> 
 entity ExpertComplaint.expert_id <<NUMBER>> 
+
+ExpertComplaint.id --* ExpertComplaint
+ExpertComplaint.description --* ExpertComplaint
+ExpertComplaint.date --* ExpertComplaint
+ExpertComplaint.researcher_id --* ExpertComplaint
+ExpertComplaint.survey_id --* ExpertComplaint
 
 entity Survey <<ENTITY>> #448094
 entity Survey.id <<NUMBER>> #ADD8E6
