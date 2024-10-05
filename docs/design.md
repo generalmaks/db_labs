@@ -13,16 +13,16 @@
 ```plantuml
 @startuml
 
-entity User #aaffaa
-entity User.id #aaffaa
-entity User.first_name #aaffaa
-entity User.last_name #aaffaa
-entity User.email #aaffaa
-entity User.phone_number #aaffaa
-entity User.password #aaffaa
-entity User.expertise_rate #aaffaa
-entity User.role_id #aaffaa
-entity User.category_id #aaffaa
+entity User <<Entity>> #aaffaa
+entity User.id <<NUMBER>> #aaffaa
+entity User.first_name <<TEXT>> #aaffaa
+entity User.last_name <<TEXT>> #aaffaa
+entity User.email <<TEXT>> #aaffaa
+entity User.phone_number <<TEXT>> #aaffaa
+entity User.password <<TEXT>> #aaffaa
+entity User.expertise_rate <<NUMBER>> #aaffaa
+entity User.role_id <<NUMBER>> #aaffaa
+entity User.category_id <<NUMBER>> #aaffaa
 
 User.id -d-* User 
 User.first_name -d-* User
@@ -34,23 +34,23 @@ User.expertise_rate -d-* User
 User.role_id -d-* User
 User.category_id -d-* User
 
-entity Role #FFDAB9
-entity Role.id #FFDAB9
-entity Role.name #FFDAB9
+entity Role <<Entity>> #FFDAB9
+entity Role.id <<NUMBER>> #FFDAB9
+entity Role.name <<TEXT>> #FFDAB9
 
 Role.id --* Role
 Role.name --* Role
 
-entity Survey #ADD8E6
-entity Survey.id #ADD8E6
-entity Survey.title #ADD8E6
-entity Survey.description #ADD8E6
-entity Survey.creation_time #ADD8E6
-entity Survey.close_time #ADD8E6
-entity Survey.is_changeable #ADD8E6
-entity Survey.is_active #ADD8E6
-entity Survey.category_id #ADD8E6
-entity Survey.owner_id #ADD8E6
+entity Survey <<Entity>> #ADD8E6
+entity Survey.id <<NUMBER>> #ADD8E6
+entity Survey.title <<TEXT>> #ADD8E6
+entity Survey.description <<TEXT>> #ADD8E6
+entity Survey.creation_date <<DATE>> #ADD8E6
+entity Survey.close_date <<DATE>> #ADD8E6
+entity Survey.is_changeable <<NUMBER>> #ADD8E6
+entity Survey.is_active <<NUMBER>> #ADD8E6
+entity Survey.category_id <<NUMBER>> #ADD8E6
+entity Survey.owner_id <<NUMBER>> #ADD8E6
 
 Survey.id -u-* Survey
 Survey.title -u-* Survey
@@ -62,37 +62,37 @@ Survey.is_changeable -u-* Survey
 Survey.is_active -u-* Survey
 Survey.owner_id -u-* Survey
 
-entity Question #D8BFD8
-entity Question.id #D8BFD8
-entity Question.header #D8BFD8
-entity Question.description #D8BFD8
-entity Question.survey_id #D8BFD8
+entity Question <<Entity>> #D8BFD8
+entity Question.id <<NUMBER>> #D8BFD8
+entity Question.header <<TEXT>> #D8BFD8
+entity Question.description <<TEXT>> #D8BFD8
+entity Question.survey_id <<NUMBER>> #D8BFD8
 
 Question.id --* Question
 Question.header --* Question
 Question.description --* Question
 Question.survey_id --* Question
 
-entity Answer #1ee8a4
-entity Answer.id #1ee8a4
-entity Answer.content #1ee8a4
-entity Answer.question_id #1ee8a4
+entity Answer <<Entity>> #1ee8a4
+entity Answer.id <<NUMBER>> #1ee8a4
+entity Answer.content <<TEXT>> #1ee8a4
+entity Answer.question_id <<NUMBER>> #1ee8a4
 
 Answer.id -d-* Answer 
 Answer.content -r-* Answer
 Answer.question_id -u-* Answer
 
-entity Category #FFCC00
-entity Category.id #FFCC00
-entity Category.name #FFCC00
+entity Category <<Entity>> #FFCC00
+entity Category.id <<NUMBER>> #FFCC00
+entity Category.name <<TEXT>> #FFCC00
 
 Category.id --* Category
 Category.name -* Category
 
-entity SelectedAnswer #FFC0CB
-entity SelectedAnswer.id #FFC0CB
-entity SelectedAnswer.user_id #FFC0CB
-entity SelectedAnswer.answer_id #FFC0CB
+entity SelectedAnswer <<Entity>> #FFC0CB
+entity SelectedAnswer.id <<NUMBER>> #FFC0CB
+entity SelectedAnswer.user_id <<NUMBER>> #FFC0CB
+entity SelectedAnswer.answer_id <<NUMBER>> #FFC0CB
 
 SelectedAnswer.id --* SelectedAnswer
 SelectedAnswer.user_id --* SelectedAnswer
