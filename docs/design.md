@@ -20,19 +20,15 @@ entity User.last_name <<TEXT>> #aaffaa
 entity User.email <<TEXT>> #aaffaa
 entity User.phone_number <<TEXT>> #aaffaa
 entity User.password <<TEXT>> #aaffaa
-entity User.expertise_rate <<NUMBER>> #aaffaa
 entity User.role_id <<NUMBER>> #aaffaa
-entity User.category_id <<NUMBER>> #aaffaa
 
-User.id -d-* User 
-User.first_name -d-* User
-User.last_name -d-* User
-User.email -d-* User
-User.phone_number -d-* User
-User.password -d-* User
-User.expertise_rate -d-* User
-User.role_id -d-* User
-User.category_id -d-* User
+User.id --* User 
+User.first_name --* User
+User.last_name --* User
+User.email --* User
+User.phone_number --* User
+User.password --* User
+User.role_id --* User
 
 entity Role <<ENTITY>> #f59e51
 entity Role.id <<NUMBER>> #FFDAB9
@@ -49,18 +45,16 @@ entity Survey.creation_date <<DATE>> #ADD8E6
 entity Survey.close_date <<DATE>> #ADD8E6
 entity Survey.is_changeable <<NUMBER>> #ADD8E6
 entity Survey.is_active <<NUMBER>> #ADD8E6
-entity Survey.category_id <<NUMBER>> #ADD8E6
 entity Survey.owner_id <<NUMBER>> #ADD8E6
 
-Survey.id -u-* Survey
-Survey.title -u-* Survey
-Survey.category_id -u-* Survey
-Survey.description -u-* Survey
-Survey.creation_date -u-* Survey
-Survey.close_date -u-* Survey
-Survey.is_changeable -u-* Survey
-Survey.is_active -u-* Survey
-Survey.owner_id -u-* Survey
+Survey.id --* Survey
+Survey.title --* Survey
+Survey.description --* Survey
+Survey.creation_date --* Survey
+Survey.close_date --* Survey
+Survey.is_changeable --* Survey
+Survey.is_active --* Survey
+Survey.owner_id --* Survey
 
 entity Question <<ENTITY>> #d147d1
 entity Question.id <<NUMBER>> #D8BFD8
@@ -98,6 +92,18 @@ SelectedAnswer.id --* SelectedAnswer
 SelectedAnswer.user_id --* SelectedAnswer
 SelectedAnswer.answer_id --* SelectedAnswer
 
+entity Expertise
+entity Expertise.id
+entity Expertise.user_id
+entity Expertise.category_id
+entity Expertise.expertise_rate <<NUMBER>>
+
+Expertise.id --* Expertise
+Expertise.user_id --* Expertise
+Expertise.category_id --* Expertise
+Expertise.expertise_rate --* Expertise
+
+
 User "1  " -- "0..*" Survey
 User "1                         " -l- "1..*" Role
 User "0..*" -- "0..* " Category
@@ -106,6 +112,8 @@ Answer "1..10" -- "1" Question
 Category "1..*  " -- "                                  0..*" Survey
 User "1" -- "0..*"  SelectedAnswer
 Answer "1" -- "0..*" SelectedAnswer
+Expertise "0..*" -- "0..1" User
+Expertise "1..*" -- "0..1" Category
 
 @enduml
 ```
