@@ -175,8 +175,8 @@
     UC_1.1.1.2 ..> UC_1.1.1 :extends
     UC_1.1.1.3 ..> UC_1.1.1 :extends
     
-    UC_1.2.1 ..> UC_1.2 :extends
-    UC_1.2.1 ..> UC_1.3 :extends
+    UC_1.2.1 <.. UC_1.2 :includes
+    UC_1.2.1 <.. UC_1.3 :includes
     
     UC_1.4.1 ..> UC_1.4 :extends
     UC_1.4.2 ..> UC_1.4 :extends
