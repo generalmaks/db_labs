@@ -1,11 +1,11 @@
 # Проєктування бази даних
 
-## Короткий зміст: 
+## Короткий зміст:
 - [модель бізнес-об'єктів](#BusinessObjectsModel)
 - [ER-модель](#ERModel)
 - [реляційна схема](#RelationalSchema)
 
- 
+
 <span id="BusinessObjectsModel"></span>
 ## Модель бізнес-об'єктів
 **Модель бізнес-об'єктів** - це опис системи, в рамках якої відображаються всі об’єкти (сутності) даної системи. [[1]](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
@@ -13,7 +13,7 @@
 ```plantuml
 @startuml
 
-entity User <<Entity>> #aaffaa
+entity User <<ENTITY>> #aaffaa
 entity User.id <<NUMBER>> #aaffaa
 entity User.first_name <<TEXT>> #aaffaa
 entity User.last_name <<TEXT>> #aaffaa
@@ -34,14 +34,14 @@ User.expertise_rate -d-* User
 User.role_id -d-* User
 User.category_id -d-* User
 
-entity Role <<Entity>> #FFDAB9
+entity Role <<ENTITY>> #FFDAB9
 entity Role.id <<NUMBER>> #FFDAB9
 entity Role.name <<TEXT>> #FFDAB9
 
 Role.id --* Role
 Role.name --* Role
 
-entity Survey <<Entity>> #ADD8E6
+entity Survey <<ENTITY>> #ADD8E6
 entity Survey.id <<NUMBER>> #ADD8E6
 entity Survey.title <<TEXT>> #ADD8E6
 entity Survey.description <<TEXT>> #ADD8E6
@@ -62,7 +62,7 @@ Survey.is_changeable -u-* Survey
 Survey.is_active -u-* Survey
 Survey.owner_id -u-* Survey
 
-entity Question <<Entity>> #D8BFD8
+entity Question <<ENTITY>> #D8BFD8
 entity Question.id <<NUMBER>> #D8BFD8
 entity Question.header <<TEXT>> #D8BFD8
 entity Question.description <<TEXT>> #D8BFD8
@@ -73,7 +73,7 @@ Question.header --* Question
 Question.description --* Question
 Question.survey_id --* Question
 
-entity Answer <<Entity>> #1ee8a4
+entity Answer <<ENTITY>> #1ee8a4
 entity Answer.id <<NUMBER>> #1ee8a4
 entity Answer.content <<TEXT>> #1ee8a4
 entity Answer.question_id <<NUMBER>> #1ee8a4
@@ -82,14 +82,14 @@ Answer.id -d-* Answer
 Answer.content -r-* Answer
 Answer.question_id -u-* Answer
 
-entity Category <<Entity>> #FFCC00
+entity Category <<ENTITY>> #FFCC00
 entity Category.id <<NUMBER>> #FFCC00
 entity Category.name <<TEXT>> #FFCC00
 
 Category.id --* Category
 Category.name -* Category
 
-entity SelectedAnswer <<Entity>> #FFC0CB
+entity SelectedAnswer <<ENTITY>> #FFC0CB
 entity SelectedAnswer.id <<NUMBER>> #FFC0CB
 entity SelectedAnswer.user_id <<NUMBER>> #FFC0CB
 entity SelectedAnswer.answer_id <<NUMBER>> #FFC0CB
