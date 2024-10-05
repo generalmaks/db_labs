@@ -88,14 +88,14 @@ entity Survey.is_changeable <<NUMBER>> #ADD8E6
 entity Survey.is_active <<NUMBER>> #ADD8E6
 entity Survey.owner_id <<NUMBER>> #ADD8E6
 
-Survey.id --* Survey
-Survey.title --* Survey
-Survey.description --* Survey
-Survey.creation_date --* Survey
-Survey.close_date --* Survey
-Survey.is_changeable --* Survey
-Survey.is_active --* Survey
-Survey.owner_id --* Survey
+Survey.id -u-* Survey
+Survey.title -u-* Survey
+Survey.description -u-* Survey
+Survey.creation_date -u-* Survey
+Survey.close_date -u-* Survey
+Survey.is_changeable -u-* Survey
+Survey.is_active -u-* Survey
+Survey.owner_id -u-* Survey
 
 entity Question <<ENTITY>> #d147d1
 entity Question.id <<NUMBER>> #D8BFD8
@@ -113,16 +113,16 @@ entity Answer.id <<NUMBER>> #1ee8a4
 entity Answer.content <<TEXT>> #1ee8a4
 entity Answer.question_id <<NUMBER>> #1ee8a4
 
-Answer.id -d-* Answer 
-Answer.content -r-* Answer
+Answer.id -u-* Answer 
+Answer.content -u-* Answer
 Answer.question_id -u-* Answer
 
 entity Category <<ENTITY>> #ab8c0c
 entity Category.id <<NUMBER>> #FFCC00
 entity Category.name <<TEXT>> #FFCC00
 
-Category.id --* Category
-Category.name -* Category
+Category.id -u-* Category
+Category.name -u-* Category
 
 entity SelectedAnswer <<ENTITY>> #f74564
 entity SelectedAnswer.id <<NUMBER>> #FFC0CB
@@ -139,27 +139,27 @@ entity Expertise.user_id <<NUMBER>> #a785ed
 entity Expertise.category_id <<NUMBER>> #a785ed
 entity Expertise.expertise_rate <<NUMBER>> #a785ed
 
-Expertise.id --* Expertise
-Expertise.user_id --* Expertise
-Expertise.category_id --* Expertise
-Expertise.expertise_rate --* Expertise
+Expertise.id -u-* Expertise
+Expertise.user_id -u-* Expertise
+Expertise.category_id -u-* Expertise
+Expertise.expertise_rate -u-* Expertise
 
 
-User "1  " -- "0" Researcher
-User "1  " -- "0" Expert
-Researcher "1, 1" -- "0 .. *" Survey
-Researcher "1, 1" -- "0 .. *" SurveyComplaint
-Researcher "1, 1" -- "0 .. *" ExpertComplaint
-Survey "1, 1" -- "1 .. *" Question
-Survey "0 .. *" -- "1 .. *" Category
-Survey "1 .. 1" -- "0 .. *" SurveyComplaint
-Question "1, 1" -- "1 .. 10" Answer
-Answer "1 .. *" -- "1, 1" SelectedAnswer
-SelectedAnswer "1, 1" -- "1 .. *" Expert
-Expert "0 .. *" -- "1 .. *" Category
-Expert "0 .. 1" -- "0 .. *" ExpertComplaint
-Expert "1 .. *" -- "1, 1" Expertise
-Expertise "1, 1" -- "0 .. *" Category
+User "1  " -d- "0" Researcher
+User "1  " -d- "0" Expert
+Researcher "1, 1" -d- "0 .. *" Survey
+Researcher "1, 1" -l- "0 .. *" SurveyComplaint
+Researcher "1, 1" -r- "0 .. *" ExpertComplaint
+Survey "1, 1" -d- "1 .. *" Question
+Survey "0 .. *" -r- "1 .. *" Category
+Survey "1 .. 1" -l- "0 .. *" SurveyComplaint
+Question "1, 1" -d- "1 .. 10" Answer
+Answer "1 .. *" -d- "1, 1" SelectedAnswer
+SelectedAnswer "1, 1" -u- "1 .. *" Expert
+Expert "0 .. *" -d- "1 .. *" Category
+Expert "0 .. 1" -l- "0 .. *" ExpertComplaint
+Expert "1 .. *" -d- "1, 1" Expertise
+Expertise "1, 1" -l- "0 .. *" Category
 
 @enduml
 ```
