@@ -28,30 +28,30 @@ User.email --* User
 User.phone_number --* User
 User.password --* User
 
-entity Researcher <<ENTITY>> 
-entity Researcher.id <<NUMBER>> 
-entity Researcher.company <<TEXT>> 
+entity Researcher <<ENTITY>> #0044b0
+entity Researcher.id <<NUMBER>> #699ff5
+entity Researcher.company <<TEXT>> #699ff5
 
 Researcher.id --* Researcher
 Researcher.company --* Researcher
 
-entity Expert <<ENTITY>> 
-entity Expert.id <<NUMBER>> 
-entity Expert.description <<TEXT>> 
-entity Expert.age <<NUMBER>> 
-entity Expert.gender <<TEXT>> 
+entity Expert <<ENTITY>> #c20000
+entity Expert.id <<NUMBER>> #ffa6a6
+entity Expert.description <<TEXT>> #ffa6a6
+entity Expert.age <<NUMBER>> #ffa6a6
+entity Expert.gender <<TEXT>> #ffa6a6
 
 Expert.id --* Expert
 Expert.description --* Expert
 Expert.age --* Expert
 Expert.gender --* Expert
 
-entity SurveyComplaint <<ENTITY>> 
-entity SurveyComplaint.id <<NUMBER>> 
-entity SurveyComplaint.description <<TEXT>> 
-entity SurveyComplaint.date <<DATE>> 
-entity SurveyComplaint.researcher_id <<NUMBER>> 
-entity SurveyComplaint.survey_id <<NUMBER>> 
+entity SurveyComplaint <<ENTITY>> #f59e51
+entity SurveyComplaint.id <<NUMBER>> #FFDAB9
+entity SurveyComplaint.description <<TEXT>> #FFDAB9
+entity SurveyComplaint.date <<DATE>> #FFDAB9
+entity SurveyComplaint.researcher_id <<NUMBER>> #FFDAB9
+entity SurveyComplaint.survey_id <<NUMBER>> #FFDAB9
 
 SurveyComplaint.id --* SurveyComplaint
 SurveyComplaint.description --* SurveyComplaint
@@ -59,18 +59,18 @@ SurveyComplaint.date --* SurveyComplaint
 SurveyComplaint.researcher_id --* SurveyComplaint
 SurveyComplaint.survey_id --* SurveyComplaint
 
-entity ExpertComplaint <<ENTITY>> 
-entity ExpertComplaint.id <<NUMBER>> 
-entity ExpertComplaint.description <<TEXT>> 
-entity ExpertComplaint.date <<DATE>> 
-entity ExpertComplaint.researcher_id <<NUMBER>> 
-entity ExpertComplaint.expert_id <<NUMBER>> 
+entity ExpertComplaint <<ENTITY>> #626b70
+entity ExpertComplaint.id <<NUMBER>> #b9c3c9
+entity ExpertComplaint.description <<TEXT>> #b9c3c9
+entity ExpertComplaint.date <<DATE>> #b9c3c9
+entity ExpertComplaint.researcher_id <<NUMBER>> #b9c3c9
+entity ExpertComplaint.expert_id <<NUMBER>> #b9c3c9
 
 ExpertComplaint.id --* ExpertComplaint
 ExpertComplaint.description --* ExpertComplaint
 ExpertComplaint.date --* ExpertComplaint
 ExpertComplaint.researcher_id --* ExpertComplaint
-ExpertComplaint.survey_id --* ExpertComplaint
+ExpertComplaint.expert_id --* ExpertComplaint
 
 entity Survey <<ENTITY>> #448094
 entity Survey.id <<NUMBER>> #ADD8E6
