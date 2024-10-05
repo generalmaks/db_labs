@@ -92,11 +92,11 @@ SelectedAnswer.id --* SelectedAnswer
 SelectedAnswer.user_id --* SelectedAnswer
 SelectedAnswer.answer_id --* SelectedAnswer
 
-entity Expertise
-entity Expertise.id
-entity Expertise.user_id
-entity Expertise.category_id
-entity Expertise.expertise_rate <<NUMBER>>
+entity Expertise <<ENTITY>> #6f44c9
+entity Expertise.id <<NUMBER>> #a785ed
+entity Expertise.user_id <<NUMBER>> #a785ed
+entity Expertise.category_id <<NUMBER>> #a785ed
+entity Expertise.expertise_rate <<NUMBER>> #a785ed
 
 Expertise.id --* Expertise
 Expertise.user_id --* Expertise
