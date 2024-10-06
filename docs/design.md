@@ -56,13 +56,13 @@ entity SurveyComplaint <<ENTITY>> #f59e51
 entity SurveyComplaint.id <<NUMBER>> #FFDAB9
 entity SurveyComplaint.description <<TEXT>> #FFDAB9
 entity SurveyComplaint.date <<DATE>> #FFDAB9
-entity SurveyComplaint.researcher_id <<NUMBER>> #FFDAB9
+entity SurveyComplaint.expert_id <<NUMBER>> #FFDAB9
 entity SurveyComplaint.survey_id <<NUMBER>> #FFDAB9
 
 SurveyComplaint.id --* SurveyComplaint
 SurveyComplaint.description --* SurveyComplaint
 SurveyComplaint.date --* SurveyComplaint
-SurveyComplaint.researcher_id --* SurveyComplaint
+SurveyComplaint.expert_id --* SurveyComplaint
 SurveyComplaint.survey_id --* SurveyComplaint
 
 entity ExpertComplaint <<ENTITY>> #626b70
@@ -148,7 +148,7 @@ Expertise.expertise_rate -u-* Expertise
 User "1  " -d- "0" Researcher
 User "1  " -d- "0" Expert
 Researcher "1, 1" -d- "0 .. *" Survey
-Researcher "1, 1" -l- "0 .. *" SurveyComplaint
+Expert "1, 1" -l- "0 .. *" SurveyComplaint
 Researcher "1, 1" -r- "0 .. *" ExpertComplaint
 Survey "1, 1" -d- "1 .. *" Question
 Survey "0 .. *" -r- "1 .. *" Category
