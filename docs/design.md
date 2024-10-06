@@ -272,6 +272,8 @@ left to right direction
   "Expert" -- "SelectedAnswer"
   "Expert" -- "SurveyComplaint"
   
+  "SurveyComplaint" -- "Survey" 
+  
   "Survey" -- "Question"
   "Survey" -- "Category"
   
