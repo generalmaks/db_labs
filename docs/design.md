@@ -213,7 +213,7 @@ left to right direction
     + description: VARCHAR
     + date: INT
     + researcher_id: INT
-    + survey_id: INT    
+    + expert_id: INT    
   }
   
    entity "Survey" {
@@ -248,9 +248,9 @@ left to right direction
 
    entity "Expertise" {
     + id: INT 
+    + expertise_rate: INT
     + user_id: INT
     + category_id: INT
-    + expertise_rate: INT
   }
   
   entity "SelectedAnswer" {
@@ -262,22 +262,23 @@ left to right direction
   
   "User" -- "Researcher"
   "User" -- "Expert"
-  
-  "Researcher" -u- "SurveyComplaint" 
+   
   "Researcher" -- "ExpertComplaint"
   "Researcher" -- "Survey"
   
   "Expert" -- "ExpertComplaint"
   "Expert" -- "Category"
-  "Expert" -- "Expertise"
+  "Expertise" -- "Expert"
   "Expert" -- "SelectedAnswer"
+  "Expert" -- "SurveyComplaint"
   
   "Survey" -- "Question"
   "Survey" -- "Category"
   
   "Question" -- "Answer"
   
-  "Answer" -- "SelectedAnswer"
+  "SelectedAnswer" -- "Answer"
+
   
 
 @enduml
