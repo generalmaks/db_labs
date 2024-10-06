@@ -203,7 +203,7 @@ left to right direction
    entity "ExpertComplaint" {
     + id: INT
     + description: VARCHAR
-    + date: INT
+    + date: DATETIME
     + researcher_id: INT
     + expert_id: INT   
   }
@@ -220,8 +220,8 @@ left to right direction
     + id: INT
     + title: VARCHAR
     + description: VARCHAR 
-    + creation_date: INT
-    + close_date: INT
+    + creation_date: DATETIME
+    + close_date: DATETIME
     + is_changeable: TINYINT
     + is_active: TINYINT
     + owner_id: INT
