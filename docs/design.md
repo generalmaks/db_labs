@@ -175,18 +175,18 @@ left to right direction
   
    entity "User" {
     + id: INT 
+    + is_admin: TINYINT
     + first_name: VARCHAR
     + last_name: VARCHAR
     + email: VARCHAR
     + phone_number: VARCHAR
-    + password: VARCHAR
-    + is_admin: INT
+    + password: VARCHAR  
   }
   
   entity "Researcher" {
     + id: INT 
-    + company: VARCHAR
     + user_id: INT
+    + company: VARCHAR
   }
   
   entity "Expert" {
@@ -198,42 +198,42 @@ left to right direction
   }
   
    entity "ExpertComplaint" {
-    + description: VARCHAR 
-    + date: INT
-    + researcher_id: INT
-    + expert_id: INT
     + id: INT
+    + expert_id: INT
+    + researcher_id: INT
+    + date: INT
+    + description: VARCHAR 
   }
   
   entity "SurveyComplaint" {
-    + date: INT 
+    + id: INT
     + researcher_id: INT
     + survey_id: INT
-    + id: INT
+    + date: INT
     + description: VARCHAR
   }
   
    entity "Survey" {
     + id: INT
-    + title: VARCHAR 
-    + description: VARCHAR
+    + owner_id: INT
     + creation_date: INT
     + close_date: INT
-    + is_changeable: INT
-    + is_active: INT
-    + owner_id: INT
+    + is_changeable: TINYINT
+    + is_active: TINYINT
+    + title: VARCHAR 
+    + description: VARCHAR  
   }
   
-   entity "Questions" {
+   entity "Question" {
     + id: INT
+    + survey_id: INT
     + header: VARCHAR 
     + description: VARCHAR
-    + survey_id: INT
   }
   
   entity "Answer" {
+    + id: INT 
     + question_id: INT
-    + id: VARCHAR 
     + content: VARCHAR
   }
   
@@ -243,13 +243,13 @@ left to right direction
   }
   
    entity "Expertise" {
-    + expertise_rate: INT
     + id: INT 
     + user_id: INT
     + category_id: INT
+    + expertise_rate: INT
   }
   
-  entity "SelectAnswer" {
+  entity "SelectedAnswer" {
     + id: INT 
     + user_id: INT
     + answer_id: INT
@@ -259,23 +259,21 @@ left to right direction
   "User" -- "Researcher"
   "User" -- "Expert"
   
-  "SurveyComplaint" -- "Researcher"
-  "SurveyComplaint" -- "Survey"
-  "Survey" -- "Questions"
+  "Researcher" -- "SurveyComplaint" 
+  "Researcher" -- "ExpertComplaint"
+  "Researcher" -- "Survey"
   
-  "Questions" -- "Answer"
-  
-  "ExpertComplaint" -- "Expert"
-  "ExpertComplaint" -- "Researcher"
-  
-  
+  "Expert" -- "ExpertComplaint"
   "Expert" -- "Category"
+  "Expert" -- "Expertise"
+  "Expert" -- "SelectedAnswer"
+  
+  "Survey" -- "Question"
   "Survey" -- "Category"
   
-  "Expertise" -- "Category"
+  "Question" -- "Answer"
   
-  "Expert" -- "SelectAnswer"
-  "Answer" -- "SelectAnswer"
+  "Answer" -- "SelectedAnswer"
   
 
 @enduml
