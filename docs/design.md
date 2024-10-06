@@ -263,26 +263,26 @@ left to right direction
   }
     
   
-  "User" -- "Researcher"
-  "User" -- "Expert"
+  "User" ||--o| "Researcher"
+  "User" ||--o| "Expert"
    
-  "Researcher" -- "ExpertComplaint"
-  "Researcher" -- "Survey"
+  "Researcher" ||--o{ "ExpertComplaint"
+  "Researcher" ||--o{ "Survey"
+ 
+  "Expert" |o--o{ "ExpertComplaint"
+  "Expert" }o--|{ "Category"
+  "Expert" }|--|| "Expertise"
+  "Expert" }|--|| "SelectedAnswer"
+  "Expert" ||--o{ "SurveyComplaint"
   
-  "Expert" -- "ExpertComplaint"
-  "Expert" -- "Category"
-  "Expertise" -- "Expert"
-  "Expert" -- "SelectedAnswer"
-  "Expert" -- "SurveyComplaint"
+  "SurveyComplaint" }o--|| "Survey" 
   
-  "SurveyComplaint" -- "Survey" 
+  "Survey" ||--|{ "Question"
+  "Survey" ||--|{ "Category"
   
-  "Survey" -- "Question"
-  "Survey" -- "Category"
+  "Question" ||--o{ "Answer"
   
-  "Question" -- "Answer"
-  
-  "SelectedAnswer" -- "Answer"
+  "SelectedAnswer" ||--|{ "Answer"
 
   
 
