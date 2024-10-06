@@ -175,73 +175,77 @@ left to right direction
   
    entity "User" {
     + id: INT 
-    + is_admin: TINYINT
     + first_name: VARCHAR
     + last_name: VARCHAR
     + email: VARCHAR
     + phone_number: VARCHAR
-    + password: VARCHAR  
+    + password: VARCHAR 
+    + is_admin: TINYINT
   }
+  
   
   entity "Researcher" {
     + id: INT 
-    + user_id: INT
     + company: VARCHAR
+    + user_id: INT
+    
   }
   
   entity "Expert" {
+    + id: INT
+    + description: VARCHAR
     + age: INT 
     + gender: VARCHAR
     + user_id: INT
-    + id: INT
-    + description: VARCHAR
   }
+  
   
    entity "ExpertComplaint" {
     + id: INT
-    + expert_id: INT
-    + researcher_id: INT
+    + description: VARCHAR
     + date: INT
-    + description: VARCHAR 
+    + researcher_id: INT
+    + expert_id: INT   
   }
   
   entity "SurveyComplaint" {
     + id: INT
-    + researcher_id: INT
-    + survey_id: INT
-    + date: INT
     + description: VARCHAR
+    + date: INT
+    + researcher_id: INT
+    + survey_id: INT    
   }
   
    entity "Survey" {
     + id: INT
-    + owner_id: INT
+    + title: VARCHAR
+    + description: VARCHAR 
     + creation_date: INT
     + close_date: INT
     + is_changeable: TINYINT
     + is_active: TINYINT
-    + title: VARCHAR 
-    + description: VARCHAR  
+    + owner_id: INT
   }
-  
+
    entity "Question" {
     + id: INT
-    + survey_id: INT
     + header: VARCHAR 
     + description: VARCHAR
+    + survey_id: INT
   }
   
   entity "Answer" {
     + id: INT 
-    + question_id: INT
     + content: VARCHAR
+    + question_id: INT
+    
   }
   
   entity "Category" {
     + id: INT
     + name: VARCHAR 
   }
-  
+
    entity "Expertise" {
     + id: INT 
     + user_id: INT
