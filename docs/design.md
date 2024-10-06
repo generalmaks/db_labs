@@ -259,7 +259,7 @@ left to right direction
   "User" -- "Researcher"
   "User" -- "Expert"
   
-  "Researcher" -- "SurveyComplaint" 
+  "Researcher" -u- "SurveyComplaint" 
   "Researcher" -- "ExpertComplaint"
   "Researcher" -- "Survey"
   
