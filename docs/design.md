@@ -172,59 +172,112 @@ Expertise "1, 1" -l- "0 .. *" Category
 
 left to right direction
   
-  entity "Role" {
-    + id: INT
-    + name: VARCHAR
-  }
   
-  entity "User" {
+   entity "User" {
     + id: INT 
     + first_name: VARCHAR
     + last_name: VARCHAR
     + email: VARCHAR
     + phone_number: VARCHAR
     + password: VARCHAR
-    + expertise_rate: DOUBLE
-    + role_id: INT
-    + category_id: INT
+    + is_admin: INT
+  }
+  
+  entity "Researcher" {
+    + id: INT 
+    + company: VARCHAR
+    + user_id: INT
+  }
+  
+  entity "Expert" {
+    + age: INT 
+    + gender: VARCHAR
+    + user_id: INT
+    + id: INT
+    + description: VARCHAR
+  }
+  
+   entity "ExpertComplaint" {
+    + description: VARCHAR 
+    + date: INT
+    + researcher_id: INT
+    + expert_id: INT
+    + id: INT
+  }
+  
+  entity "SurveyComplaint" {
+    + date: INT 
+    + researcher_id: INT
+    + survey_id: INT
+    + id: INT
+    + description: VARCHAR
+  }
+  
+   entity "Survey" {
+    + id: INT
+    + title: VARCHAR 
+    + description: VARCHAR
+    + creation_date: INT
+    + close_date: INT
+    + is_changeable: INT
+    + is_active: INT
+    + owner_id: INT
+  }
+  
+   entity "Questions" {
+    + id: INT
+    + header: VARCHAR 
+    + description: VARCHAR
+    + survey_id: INT
+  }
+  
+  entity "Answer" {
+    + question_id: INT
+    + id: VARCHAR 
+    + content: VARCHAR
   }
   
   entity "Category" {
     + id: INT
-    + name: VARCHAR
+    + name: VARCHAR 
   }
   
-  entity "Survey" {
-    + id: INT
-    + title: VARCHAR
-    + description: TEXT
-    + creation_time: DATETIME 
-    + close_time: DATETIME
-    + is_changeable: TINYINT
-    + is_active: TINYINT
-    + category_id: INT 
-    + owner_id: INT
+   entity "Expertise" {
+    + expertise_rate: INT
+    + id: INT 
+    + user_id: INT
+    + category_id: INT
   }
   
-  entity "Questions" {
-    + id: INT
-    + header: VARCHAR
-    + description: TEXT
-    + survey_id: INT
+  entity "SelectAnswer" {
+    + id: INT 
+    + user_id: INT
+    + answer_id: INT
   }
+    
   
-  entity "Answers" {
-    + id: INT
-    + content: TEXT
-    + question_id: INT
-  }
+  "User" -- "Researcher"
+  "User" -- "Expert"
   
-  "User" ||--|{ "Role"
-  "User" }o--o{ "Category"
-  "User" ||--o{ "Survey"
-  "Survey" ||--|{ "Questions"
-  "Questions" ||--|{ "Answers"
-  "Survey" }o--|{ "Category"
+  "SurveyComplaint" -- "Researcher"
+  "SurveyComplaint" -- "Survey"
+  "Survey" -- "Questions"
+  
+  "Questions" -- "Answer"
+  
+  "ExpertComplaint" -- "Expert"
+  "ExpertComplaint" -- "Researcher"
+  
+  
+  "Expert" -- "Category"
+  "Survey" -- "Category"
+  
+  "Expertise" -- "Category"
+  
+  "Expert" -- "SelectAnswer"
+  "Answer" -- "SelectAnswer"
+  
+
 @enduml
 ```
 
