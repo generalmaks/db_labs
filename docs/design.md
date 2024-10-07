@@ -147,21 +147,21 @@ Expertise.category_id -u-* Expertise
 Expertise.expertise_rate -u-* Expertise
 
 
-Researcher "0 .. 1" -u- "1  " User
-Expert "0 .. 1" -u- "1  " User
+Researcher "0, 1" -u- "1, 1" User
+Expert "0, 1" -u- "1, 1" User
 Researcher "1, 1" -d- "0 .. *" Survey
 Researcher "1, 1" -d- "0 .. *" ExpertComplaint
 Survey "1, 1" -d- "1 .. *" Question
 Survey "0 .. *" -d- "1 .. *" Category
-Survey "1 .. 1" -d- "0 .. *" SurveyComplaint
+Survey "1, 1" -d- "0 .. *" SurveyComplaint
 Question "1, 1" -u- "1 .. 10" Answer
-Answer "1 .. *" -d- "1, 1   " SelectedAnswer
-SelectedAnswer "1, 1" -d- "1 .. * " Expert
-Expert "                             0 .. 1" -d- "1 .. *" Category
+Answer "1, 1" -d- "0 .. *" SelectedAnswer
+SelectedAnswer "0 .. *" -d- "1, 1" Expert
+Category "1 .. *" -u- "0 .. *" Expert
 Expert "1, 1" -d- "0 .. *" SurveyComplaint
-Expert "0 .. *" -d- "0 .. *" ExpertComplaint
-Expert "1 .. *" -d- "1, 1" Expertise
-Expertise "1, 1" -u- "0 .. *" Category
+ExpertComplaint "0 .. *" -u- "1, 1" Expert
+Expert "1, 1" -d- "1 .. *" Expertise
+Expertise "0 .. *" -u- "1, 1" Category
 
 @enduml
 ```
