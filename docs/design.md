@@ -278,11 +278,13 @@ left to right direction
   "SurveyComplaint" }o--|| "Survey" 
   
   "Survey" ||--|{ "Question"
-  "Survey" ||--|{ "Category"
+  "Survey" }o--|{ "Category"
   
-  "Question" ||--o{ "Answer"
+  "Question" ||--|{ "Answer"
   
   "SelectedAnswer" ||--|{ "Answer"
+  
+  "Expertise" }o--|{ "Category"
 
   
 
