@@ -35,50 +35,38 @@ User.is_admin -d-* User
 entity Researcher <<ENTITY>> #0044b0
 entity Researcher.id <<NUMBER>> #699ff5
 entity Researcher.company <<TEXT>> #699ff5
-entity Researcher.user_id <<NUMBER>> #699ff5
 
 Researcher.id -d-* Researcher
 Researcher.company -d-* Researcher
-Researcher.user_id -d-* Researcher
 
 entity Expert <<ENTITY>> #47442e
 entity Expert.id <<NUMBER>> #858063
 entity Expert.description <<TEXT>> #858063
 entity Expert.age <<NUMBER>> #858063
 entity Expert.gender <<TEXT>> #858063
-entity Expert.user_id <<NUMBER>> #858063
 
 Expert.id -d-* Expert
 Expert.description -d-* Expert
 Expert.age -d-* Expert
 Expert.gender -d-* Expert
-Expert.user_id -d-* Expert
 
 entity SurveyComplaint <<ENTITY>> #f59e51
 entity SurveyComplaint.id <<NUMBER>> #FFDAB9
 entity SurveyComplaint.description <<TEXT>> #FFDAB9
 entity SurveyComplaint.date <<DATE>> #FFDAB9
-entity SurveyComplaint.expert_id <<NUMBER>> #FFDAB9
-entity SurveyComplaint.survey_id <<NUMBER>> #FFDAB9
 
 SurveyComplaint.id -u-* SurveyComplaint
 SurveyComplaint.description -u-* SurveyComplaint
 SurveyComplaint.date -u-* SurveyComplaint
-SurveyComplaint.expert_id -u-* SurveyComplaint
-SurveyComplaint.survey_id -u-* SurveyComplaint
 
 entity ExpertComplaint <<ENTITY>> #626b70
 entity ExpertComplaint.id <<NUMBER>> #b9c3c9
 entity ExpertComplaint.description <<TEXT>> #b9c3c9
 entity ExpertComplaint.date <<DATE>> #b9c3c9
-entity ExpertComplaint.researcher_id <<NUMBER>> #b9c3c9
-entity ExpertComplaint.expert_id <<NUMBER>> #b9c3c9
 
 ExpertComplaint.id -u-* ExpertComplaint
 ExpertComplaint.description -u-* ExpertComplaint
 ExpertComplaint.date -u-* ExpertComplaint
-ExpertComplaint.researcher_id -u-* ExpertComplaint
-ExpertComplaint.expert_id -u-* ExpertComplaint
 
 entity Survey <<ENTITY>> #448094
 entity Survey.id <<NUMBER>> #ADD8E6
@@ -88,7 +76,6 @@ entity Survey.creation_date <<DATE>> #ADD8E6
 entity Survey.close_date <<DATE>> #ADD8E6
 entity Survey.is_changeable <<NUMBER>> #ADD8E6
 entity Survey.is_active <<NUMBER>> #ADD8E6
-entity Survey.owner_id <<NUMBER>> #ADD8E6
 
 Survey.id -d-* Survey
 Survey.title -d-* Survey
@@ -97,27 +84,22 @@ Survey.creation_date -d-* Survey
 Survey.close_date -d-* Survey
 Survey.is_changeable -d-* Survey
 Survey.is_active -d-* Survey
-Survey.owner_id -d-* Survey
 
 entity Question <<ENTITY>> #d147d1
 entity Question.id <<NUMBER>> #D8BFD8
 entity Question.header <<TEXT>> #D8BFD8
 entity Question.description <<TEXT>> #D8BFD8
-entity Question.survey_id <<NUMBER>> #D8BFD8
 
 Question.id -d-* Question
 Question.header -d-* Question
 Question.description -d-* Question
-Question.survey_id -d-* Question
 
 entity Answer <<ENTITY>> #117d59
 entity Answer.id <<NUMBER>> #1ee8a4
 entity Answer.content <<TEXT>> #1ee8a4
-entity Answer.question_id <<NUMBER>> #1ee8a4
 
 Answer.id -d-* Answer
 Answer.content -d-* Answer
-Answer.question_id -d-* Answer
 
 entity Category <<ENTITY>> #ab8c0c
 entity Category.id <<NUMBER>> #FFCC00
@@ -128,22 +110,14 @@ Category.name -u-* Category
 
 entity SelectedAnswer <<ENTITY>> #f74564
 entity SelectedAnswer.id <<NUMBER>> #FFC0CB
-entity SelectedAnswer.user_id <<NUMBER>> #FFC0CB
-entity SelectedAnswer.answer_id <<NUMBER>> #FFC0CB
 
 SelectedAnswer.id -d-* SelectedAnswer
-SelectedAnswer.user_id -d-* SelectedAnswer
-SelectedAnswer.answer_id -d-* SelectedAnswer
 
 entity Expertise <<ENTITY>> #6f44c9
 entity Expertise.id <<NUMBER>> #a785ed
-entity Expertise.user_id <<NUMBER>> #a785ed
-entity Expertise.category_id <<NUMBER>> #a785ed
 entity Expertise.expertise_rate <<NUMBER>> #a785ed
 
 Expertise.id -u-* Expertise
-Expertise.user_id -u-* Expertise
-Expertise.category_id -u-* Expertise
 Expertise.expertise_rate -u-* Expertise
 
 
@@ -157,7 +131,6 @@ Survey "1, 1" -d- "0 .. *" SurveyComplaint
 Question "1, 1" -u- "1 .. 10" Answer
 Answer "1, 1" -d- "0 .. *" SelectedAnswer
 SelectedAnswer "0 .. *" -d- "1, 1" Expert
-Category "1 .. *" -u- "0 .. *" Expert
 Expert "1, 1" -d- "0 .. *" SurveyComplaint
 ExpertComplaint "0 .. *" -u- "1, 1" Expert
 Expert "1, 1" -d- "1 .. *" Expertise
