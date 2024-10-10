@@ -169,7 +169,7 @@ left to right direction
   
   entity "Expert" {
     + id: INT
-    + description: VARCHAR
+    + description: TEXT
     + age: INT 
     + gender: VARCHAR
     + user_id: INT
@@ -178,7 +178,7 @@ left to right direction
   
    entity "ExpertComplaint" {
     + id: INT
-    + description: VARCHAR
+    + description: TEXT
     + date: DATETIME
     + researcher_id: INT
     + expert_id: INT   
@@ -186,8 +186,8 @@ left to right direction
   
   entity "SurveyComplaint" {
     + id: INT
-    + description: VARCHAR
-    + date: INT
+    + description: TEXT
+    + date: DATETIME
     + researcher_id: INT
     + expert_id: INT    
   }
@@ -195,7 +195,7 @@ left to right direction
    entity "Survey" {
     + id: INT
     + title: VARCHAR
-    + description: VARCHAR 
+    + description: TEXT 
     + creation_date: DATETIME
     + close_date: DATETIME
     + is_changeable: TINYINT
@@ -206,13 +206,13 @@ left to right direction
    entity "Question" {
     + id: INT
     + header: VARCHAR 
-    + description: VARCHAR
+    + description: TEXT
     + survey_id: INT
   }
   
   entity "Answer" {
     + id: INT 
-    + content: VARCHAR
+    + content: TEXT
     + question_id: INT
     
   }
@@ -224,14 +224,14 @@ left to right direction
 
    entity "Expertise" {
     + id: INT 
-    + expertise_rate: INT
+    + expertise_rate: DOUBLE
     + user_id: INT
     + category_id: INT
   }
   
   entity "SelectedAnswer" {
     + id: INT 
-    + user_id: INT
+    + expert_id: INT
     + answer_id: INT
   }
     
@@ -243,7 +243,6 @@ left to right direction
   "Researcher" ||--o{ "Survey"
  
   "Expert" |o--o{ "ExpertComplaint"
-  "Expert" }o--|{ "Category"
   "Expert" }|--|| "Expertise"
   "Expert" }|--|| "SelectedAnswer"
   "Expert" ||--o{ "SurveyComplaint"
