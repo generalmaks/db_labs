@@ -116,19 +116,19 @@ entity SurveyCategory.id <<NUMBER>> #ADD8E6
 SurveyCategory.id --* SurveyCategory
 
 
-User "1, 1" -d- "0 .. *" Survey
-User "1, 1" -d- "0 .. *" ExpertComplaint :expert
-Survey "1, 1" -d- "1 .. *" Question
-Survey "1, 1" -d- "0 .. *" SurveyCategory
+User "1, 1" -- "0 .. *" Survey
+User "1, 1" -- "0 .. *" ExpertComplaint :expert
+Survey "1, 1" -- "1 .. *" Question
+Survey "1, 1" -- "0 .. *" SurveyCategory
 Category "1, 1" -- "1 .. *" SurveyCategory
-Survey "1, 1" -d- "0 .. *" SurveyComplaint
-Question "1, 1" -u- "0 .. *" Option
-Option "1, 1" -d- "0 .. *" Answer
+Survey "1, 1" -- "0 .. *" SurveyComplaint
+Question "1, 1" -- "0 .. *" Option
+Option "1, 1" -- "0 .. *" Answer
 Answer "0 .. *" -d- "1, 1" User
-User "1, 1" -d- "0 .. *" SurveyComplaint
+User "1, 1" -- "0 .. *" SurveyComplaint
 ExpertComplaint "0 .. *" -u- "1, 1" User :researcher
 User "1, 1" -d- "1 .. *" Expertise
-Expertise "0 .. *" -u- "1, 1" Category
+Expertise "0 .. *" -- "1, 1" Category
 
 @enduml
 ```
