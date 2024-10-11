@@ -242,9 +242,9 @@ left to right direction
   "Researcher" ||--o{ "ExpertComplaint"
   "Researcher" ||--o{ "Survey"
  
-  "Expert" |o--o{ "ExpertComplaint"
-  "Expert" }|--|| "Expertise"
-  "Expert" }|--|| "SelectedAnswer"
+  "Expert" ||--o{ "ExpertComplaint"
+  "Expert" ||--|{ "Expertise"
+  "Expert" ||--o{ "SelectedAnswer"
   "Expert" ||--o{ "SurveyComplaint"
   
   "SurveyComplaint" }o--|| "Survey" 
@@ -254,9 +254,9 @@ left to right direction
   
   "Question" ||--|{ "Answer"
   
-  "SelectedAnswer" ||--|{ "Answer"
+  "SelectedAnswer" }o--|| "Answer"
   
-  "Expertise" }o--|{ "Category"
+  "Expertise" }o--|| "Category"
 
   
 
