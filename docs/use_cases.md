@@ -118,8 +118,8 @@
     
     UC_1.1.1 ..> UC_1.1 :extends
     UC_1.2.1 .left.> UC_1.2 :extends
-    UC_1.34.1 .right.> UC_1.3 :extends
-    UC_1.34.1 .up.> UC_1.4 :extends
+    UC_1.34.1 <.r. UC_1.3 :includes
+    UC_1.34.1 <.up. UC_1.4 :includes
     UC_1.4.1 .right.> UC_1.4 :extends
     UC_1.4.2 ..> UC_1.4 :extends
     
@@ -175,8 +175,8 @@
     UC_1.1.1.2 ..> UC_1.1.1 :extends
     UC_1.1.1.3 ..> UC_1.1.1 :extends
     
-    UC_1.2.1 ..> UC_1.2 :extends
-    UC_1.2.1 ..> UC_1.3 :extends
+    UC_1.2.1 <.. UC_1.2 :includes
+    UC_1.2.1 <.. UC_1.3 :includes
     
     UC_1.4.1 ..> UC_1.4 :extends
     UC_1.4.2 ..> UC_1.4 :extends
@@ -218,7 +218,7 @@ actor "Експерт" as Expert #eacffa
     UC_1.1.1 .up.> UC_1.1 :extends
     UC_1.1.2 ..> UC_1.1 :extends
     
-    UC_1.1.1.1 .>> UC_1.1.1 :extends
+    UC_1.1.1.1 <<. UC_1.1.1 :includes
     UC_1.1.2.1 .>> UC_1.1.2 :extends
         
     right footer
@@ -272,11 +272,11 @@ actor "Адміністратор системи" as Admin #94f1ff
     UC_1.3.1 ..> UC_1.3 :extends
     UC_1.3.2 ..> UC_1.3 :extends
     
-    UC_1.2.12 ..> UC_1.2.1 :extends
-    UC_1.2.12 ..> UC_1.2.2 :extends
+    UC_1.2.12 <.. UC_1.2.1 :includes
+    UC_1.2.12 <.. UC_1.2.2 :includes
     
-    UC_1.3.12 ..> UC_1.3.1 :extends
-    UC_1.3.12 ..> UC_1.3.2 :extends
+    UC_1.3.12 <.. UC_1.3.1 :includes
+    UC_1.3.12 <.. UC_1.3.2 :includes
         
     right footer
         Модель прецедентів адміністратора системи.

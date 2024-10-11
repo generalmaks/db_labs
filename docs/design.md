@@ -1,11 +1,11 @@
 # Проєктування бази даних
 
-## Короткий зміст: 
+## Короткий зміст:
 - [модель бізнес-об'єктів](#BusinessObjectsModel)
 - [ER-модель](#ERModel)
 - [реляційна схема](#RelationalSchema)
 
- 
+
 <span id="BusinessObjectsModel"></span>
 ## Модель бізнес-об'єктів
 **Модель бізнес-об'єктів** - це опис системи, в рамках якої відображаються всі об’єкти (сутності) даної системи. [[1]](https://economyandsociety.in.ua/journals/7_ukr/82.pdf)
@@ -13,92 +13,132 @@
 ```plantuml
 @startuml
 
-entity User #aaffaa
-entity User.id #aaffaa
-entity User.first_name #aaffaa
-entity User.last_name #aaffaa
-entity User.email #aaffaa
-entity User.phone_number #aaffaa
-entity User.password #aaffaa
-entity User.expertise_rate #aaffaa
-entity User.role_id #aaffaa
-entity User.category_id #aaffaa
+left to right direction
 
-User.id -d-* User 
+entity User <<ENTITY >> #52f752
+entity User.id <<NUMBER>> #aaffaa
+entity User.first_name <<TEXT>> #aaffaa
+entity User.last_name <<TEXT>> #aaffaa
+entity User.email <<TEXT>> #aaffaa
+entity User.phone_number <<TEXT>> #aaffaa
+entity User.password <<TEXT>> #aaffaa
+entity User.is_admin <<NUMBER>> #aaffaa
+
+User.id -d-* User
 User.first_name -d-* User
 User.last_name -d-* User
 User.email -d-* User
 User.phone_number -d-* User
 User.password -d-* User
-User.expertise_rate -d-* User
-User.role_id -d-* User
-User.category_id -d-* User
+User.is_admin -d-* User
 
-entity Role #FFDAB9
-entity Role.id #FFDAB9
-entity Role.name #FFDAB9
+entity Researcher <<ENTITY>> #0044b0
+entity Researcher.id <<NUMBER>> #699ff5
+entity Researcher.company <<TEXT>> #699ff5
 
-Role.id --* Role
-Role.name --* Role
+Researcher.id -d-* Researcher
+Researcher.company -d-* Researcher
 
-entity Survey #ADD8E6
-entity Survey.id #ADD8E6
-entity Survey.title #ADD8E6
-entity Survey.description #ADD8E6
-entity Survey.creation_time #ADD8E6
-entity Survey.close_time #ADD8E6
-entity Survey.is_changeable #ADD8E6
-entity Survey.is_active #ADD8E6
-entity Survey.category_id #ADD8E6
-entity Survey.owner_id #ADD8E6
+entity Expert <<ENTITY>> #47442e
+entity Expert.id <<NUMBER>> #858063
+entity Expert.description <<TEXT>> #858063
+entity Expert.age <<NUMBER>> #858063
+entity Expert.gender <<TEXT>> #858063
 
-Survey.id -u-* Survey
-Survey.title -u-* Survey
-Survey.category_id -u-* Survey
-Survey.description -u-* Survey
-Survey.creation_time -u-* Survey
-Survey.close_time -u-* Survey
-Survey.is_changeable -u-* Survey
-Survey.is_active -u-* Survey
-Survey.owner_id -u-* Survey
+Expert.id -d-* Expert
+Expert.description -d-* Expert
+Expert.age -d-* Expert
+Expert.gender -d-* Expert
 
-entity Question #D8BFD8
-entity Question.id #D8BFD8
-entity Question.header #D8BFD8
-entity Question.description #D8BFD8
-entity Question.survey_id #D8BFD8
+entity SurveyComplaint <<ENTITY>> #f59e51
+entity SurveyComplaint.id <<NUMBER>> #FFDAB9
+entity SurveyComplaint.description <<TEXT>> #FFDAB9
+entity SurveyComplaint.date <<DATE>> #FFDAB9
 
-Question.id --* Question
-Question.header --* Question
-Question.description --* Question
-Question.survey_id --* Question
+SurveyComplaint.id -u-* SurveyComplaint
+SurveyComplaint.description -u-* SurveyComplaint
+SurveyComplaint.date -u-* SurveyComplaint
 
-entity Answer #FFC0CB
-entity Answer.id #FFC0CB
-entity Answer.content #FFC0CB
-entity Answer.question_id #FFC0CB
+entity ExpertComplaint <<ENTITY>> #626b70
+entity ExpertComplaint.id <<NUMBER>> #b9c3c9
+entity ExpertComplaint.description <<TEXT>> #b9c3c9
+entity ExpertComplaint.date <<DATE>> #b9c3c9
 
-Answer.id -d-* Answer 
-Answer.content -r-* Answer
-Answer.question_id -u-* Answer
+ExpertComplaint.id -u-* ExpertComplaint
+ExpertComplaint.description -u-* ExpertComplaint
+ExpertComplaint.date -u-* ExpertComplaint
 
-entity Category #FFCC00
-entity Category.id #FFCC00
-entity Category.name #FFCC00
+entity Survey <<ENTITY>> #448094
+entity Survey.id <<NUMBER>> #ADD8E6
+entity Survey.title <<TEXT>> #ADD8E6
+entity Survey.description <<TEXT>> #ADD8E6
+entity Survey.creation_date <<DATE>> #ADD8E6
+entity Survey.close_date <<DATE>> #ADD8E6
+entity Survey.is_changeable <<NUMBER>> #ADD8E6
+entity Survey.is_active <<NUMBER>> #ADD8E6
 
-Category.id -l-* Category
-Category.name -l-* Category
+Survey.id -d-* Survey
+Survey.title -d-* Survey
+Survey.description -d-* Survey
+Survey.creation_date -d-* Survey
+Survey.close_date -d-* Survey
+Survey.is_changeable -d-* Survey
+Survey.is_active -d-* Survey
 
-User "1  " -- "0..*" Survey
-User "1                         " -l- "1..*" Role
-User "0..*" -- "0..* " Category
-Question "1..*" -r- "1" Survey
-Answer "1..10" -r- "1" Question
-Category "1..*  " -- "                                  0..*" Survey
-  
+entity Question <<ENTITY>> #d147d1
+entity Question.id <<NUMBER>> #D8BFD8
+entity Question.header <<TEXT>> #D8BFD8
+entity Question.description <<TEXT>> #D8BFD8
+
+Question.id -d-* Question
+Question.header -d-* Question
+Question.description -d-* Question
+
+entity Answer <<ENTITY>> #117d59
+entity Answer.id <<NUMBER>> #1ee8a4
+entity Answer.content <<TEXT>> #1ee8a4
+
+Answer.id -d-* Answer
+Answer.content -d-* Answer
+
+entity Category <<ENTITY>> #ab8c0c
+entity Category.id <<NUMBER>> #FFCC00
+entity Category.name <<TEXT>> #FFCC00
+
+Category.id -u-* Category
+Category.name -u-* Category
+
+entity SelectedAnswer <<ENTITY>> #f74564
+entity SelectedAnswer.id <<NUMBER>> #FFC0CB
+
+SelectedAnswer.id -d-* SelectedAnswer
+
+entity Expertise <<ENTITY>> #6f44c9
+entity Expertise.id <<NUMBER>> #a785ed
+entity Expertise.expertise_rate <<NUMBER>> #a785ed
+
+Expertise.id -u-* Expertise
+Expertise.expertise_rate -u-* Expertise
+
+
+Researcher "0, 1" -u- "1, 1" User
+Expert "0, 1" -u- "1, 1" User
+Researcher "1, 1" -d- "0 .. *" Survey
+Researcher "1, 1" -d- "0 .. *" ExpertComplaint
+Survey "1, 1" -d- "1 .. *" Question
+Survey "0 .. *" -d- "1 .. *" Category
+Survey "1, 1" -d- "0 .. *" SurveyComplaint
+Question "1, 1" -u- "1 .. 10" Answer
+Answer "1, 1" -d- "0 .. *" SelectedAnswer
+SelectedAnswer "0 .. *" -d- "1, 1" Expert
+Expert "1, 1" -d- "0 .. *" SurveyComplaint
+ExpertComplaint "0 .. *" -u- "1, 1" Expert
+Expert "1, 1" -d- "1 .. *" Expertise
+Expertise "0 .. *" -u- "1, 1" Category
 
 @enduml
 ```
+
 <span id="ERModel"></span>
 ## ER-модель
 **ER-модель** описує сутності системи та визначає зв'язки між ними. [[2]](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
@@ -108,59 +148,118 @@ Category "1..*  " -- "                                  0..*" Survey
 
 left to right direction
   
-  entity "Role" {
-    + id: INT
-    + name: VARCHAR
-  }
   
-  entity "User" {
+   entity "User" {
     + id: INT 
     + first_name: VARCHAR
     + last_name: VARCHAR
     + email: VARCHAR
     + phone_number: VARCHAR
-    + password: VARCHAR
-    + expertise_rate: DOUBLE
-    + role_id: INT
-    + category_id: INT
+    + password: VARCHAR 
+    + is_admin: TINYINT
   }
   
-  entity "Category" {
+  
+  entity "Researcher" {
+    + id: INT 
+    + company: VARCHAR
+    + user_id: INT
+    
+  }
+  
+  entity "Expert" {
     + id: INT
-    + name: VARCHAR
+    + description: TEXT
+    + age: INT 
+    + gender: VARCHAR
+    + user_id: INT
   }
   
-  entity "Survey" {
+  
+   entity "ExpertComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+    + researcher_id: INT
+    + expert_id: INT   
+  }
+  
+  entity "SurveyComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+    + researcher_id: INT
+    + expert_id: INT    
+  }
+  
+   entity "Survey" {
     + id: INT
     + title: VARCHAR
-    + description: TEXT
-    + creation_time: DATETIME 
-    + close_time: DATETIME
+    + description: TEXT 
+    + creation_date: DATETIME
+    + close_date: DATETIME
     + is_changeable: TINYINT
     + is_active: TINYINT
-    + category_id: INT 
     + owner_id: INT
   }
-  
-  entity "Questions" {
+
+   entity "Question" {
     + id: INT
-    + header: VARCHAR
+    + header: VARCHAR 
     + description: TEXT
     + survey_id: INT
   }
   
-  entity "Answers" {
-    + id: INT
+  entity "Answer" {
+    + id: INT 
     + content: TEXT
     + question_id: INT
+    
   }
   
-  "User" ||--|{ "Role"
-  "User" }o--o{ "Category"
-  "User" ||--o{ "Survey"
-  "Survey" ||--|{ "Questions"
-  "Questions" ||--|{ "Answers"
+  entity "Category" {
+    + id: INT
+    + name: VARCHAR 
+  }
+
+   entity "Expertise" {
+    + id: INT 
+    + expertise_rate: DOUBLE
+    + user_id: INT
+    + category_id: INT
+  }
+  
+  entity "SelectedAnswer" {
+    + id: INT 
+    + expert_id: INT
+    + answer_id: INT
+  }
+    
+  
+  "User" ||--o| "Researcher"
+  "User" ||--o| "Expert"
+   
+  "Researcher" ||--o{ "ExpertComplaint"
+  "Researcher" ||--o{ "Survey"
+ 
+  "Expert" ||--o{ "ExpertComplaint"
+  "Expert" ||--|{ "Expertise"
+  "Expert" ||--o{ "SelectedAnswer"
+  "Expert" ||--o{ "SurveyComplaint"
+  
+  "SurveyComplaint" }o--|| "Survey" 
+  
+  "Survey" ||--|{ "Question"
   "Survey" }o--|{ "Category"
+  
+  "Question" ||--|{ "Answer"
+  
+  "SelectedAnswer" }o--|| "Answer"
+  
+  "Expertise" }o--|| "Category"
+
+  
+
 @enduml
 ```
 
@@ -168,7 +267,10 @@ left to right direction
 ## Реляційна схема
 **Реляційна схема** - це набір таблиць, кожна з яких відповідає за одну з сутностей реляційної бази даних, та зв'язків між ними. Реляційна схема використовується для представлення реляційної бази даних. [[3]](https://www.sciencedirect.com/topics/computer-science/relational-schema#:~:text=A%20relational%20schema%20is%20a,applications%20belong%20to%20one%20schema.)
 
-![Реляційна схема](https://github.com/user-attachments/assets/9b6d65f1-b248-401d-8b84-e6596b406229)
+![Реляційна схема](https://github.com/user-attachments/assets/1aee78d5-a66b-456c-92b1-e7f1ab6a3ecf)
+
+
+
 
 
 ## Посилання
