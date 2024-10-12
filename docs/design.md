@@ -151,42 +151,14 @@ left to right direction
     + phone_number: VARCHAR
     + password: VARCHAR 
     + is_admin: TINYINT
-  }
-  
-  
-  entity "Researcher" {
-    + id: INT 
-    + company: VARCHAR
-    + user_id: INT
-    
-  }
-  
-  entity "Expert" {
-    + id: INT
-    + description: TEXT
-    + age: INT 
+    + description: VARCHAR
+    + age: VARCHAR
     + gender: VARCHAR
-    + user_id: INT
+    + company: VARCHAR
+    + is_admin: TINYINT 
   }
   
-  
-   entity "ExpertComplaint" {
-    + id: INT
-    + description: TEXT
-    + date: DATETIME
-    + researcher_id: INT
-    + expert_id: INT   
-  }
-  
-  entity "SurveyComplaint" {
-    + id: INT
-    + description: TEXT
-    + date: DATETIME
-    + researcher_id: INT
-    + expert_id: INT    
-  }
-  
-   entity "Survey" {
+     entity "Survey" {
     + id: INT
     + title: VARCHAR
     + description: TEXT 
@@ -194,52 +166,56 @@ left to right direction
     + close_date: DATETIME
     + is_changeable: TINYINT
     + is_active: TINYINT
-    + owner_id: INT
   }
-
-   entity "Question" {
+  
+     entity "Question" {
     + id: INT
     + header: VARCHAR 
     + description: TEXT
-    + survey_id: INT
+  }
+
+   entity "Option" {
+    + id: INT
+    + content: VARCHAR    
   }
   
-  entity "Answer" {
+    entity "Answer" {
+    + id: INT  
+  }
+  
+    entity "SurveyComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+  }
+  
+    entity "SurveyCategory"{
+    + id: INT
+    }
+  
+    entity "ExpertComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+  }
+  
+  
+   entity "Expertise" {
     + id: INT 
-    + content: TEXT
-    + question_id: INT
-    
+    + expertise_rate: DOUBLE
   }
   
-  entity "Category" {
+  
+   entity "Category" {
     + id: INT
     + name: VARCHAR 
   }
 
-   entity "Expertise" {
-    + id: INT 
-    + expertise_rate: DOUBLE
-    + user_id: INT
-    + category_id: INT
-  }
   
-  entity "SelectedAnswer" {
-    + id: INT 
-    + expert_id: INT
-    + answer_id: INT
-  }
-    
-  
-  "User" ||--o| "Researcher"
-  "User" ||--o| "Expert"
+
    
-  "Researcher" ||--o{ "ExpertComplaint"
-  "Researcher" ||--o{ "Survey"
  
-  "Expert" ||--o{ "ExpertComplaint"
-  "Expert" ||--|{ "Expertise"
-  "Expert" ||--o{ "SelectedAnswer"
-  "Expert" ||--o{ "SurveyComplaint"
+
   
   "SurveyComplaint" }o--|| "Survey" 
   
