@@ -150,7 +150,6 @@ left to right direction
     + email: VARCHAR
     + phone_number: VARCHAR
     + password: VARCHAR 
-    + is_admin: TINYINT
     + description: VARCHAR
     + age: VARCHAR
     + gender: VARCHAR
@@ -191,18 +190,24 @@ left to right direction
   
     entity "SurveyCategory"{
     + id: INT
+    + survey_id: INT
+    + category_id: INT
     }
   
     entity "ExpertComplaint" {
     + id: INT
     + description: TEXT
     + date: DATETIME
+    + researcher_id: INT
+    + expert_id: INT   
   }
   
   
    entity "Expertise" {
     + id: INT 
     + expertise_rate: DOUBLE
+    + user_id: INT
+    + category_id: INT
   }
   
   
