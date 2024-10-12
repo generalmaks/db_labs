@@ -165,7 +165,7 @@ left to right direction
     + close_date: DATETIME
     + is_changeable: TINYINT
     + is_active: TINYINT
-    + owner_id: TINYINT
+    + owner_id: INT
   }
   
      entity "Question" {
