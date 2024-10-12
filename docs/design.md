@@ -210,25 +210,26 @@ left to right direction
     + id: INT
     + name: VARCHAR 
   }
+  
+    "User" ||--o{ "Survey"
+    "User" ||--o{ "SurveyComplaint"
+    "User" ||--o{ "ExpertComplaint" : expert
+    "User" ||--o{ "ExpertComplaint" : researcher
+    "User" ||--|{ "Expertise"
+    
+    "Survey" ||--|{ "Question"
+    "Survey" ||--o{ "SurveyCategory"
+    "Survey" ||--o{ "SurveyComplaint"
+    
+    "Expertise" }o--|| "Category"
 
-  
-
-   
- 
-
-  
-  "SurveyComplaint" }o--|| "Survey" 
-  
-  "Survey" ||--|{ "Question"
-  "Survey" }o--|{ "Category"
-  
-  "Question" ||--|{ "Answer"
-  
-  "SelectedAnswer" }o--|| "Answer"
-  
-  "Expertise" }o--|| "Category"
-
-  
+    "Question" ||--o{ "Option"
+    
+    "Option" ||--o{ "Answer"
+    
+    "Answer" }o--|| "User"
+    
+    "SurveyCategory" }|--|| "Category"
 
 @enduml
 ```
