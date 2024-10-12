@@ -150,7 +150,7 @@ left to right direction
     + email: VARCHAR
     + phone_number: VARCHAR
     + password: VARCHAR 
-    + description: VARCHAR
+    + description: TEXT
     + age: VARCHAR
     + gender: VARCHAR
     + company: VARCHAR
@@ -165,27 +165,34 @@ left to right direction
     + close_date: DATETIME
     + is_changeable: TINYINT
     + is_active: TINYINT
+    + owner_id: TINYINT
   }
   
      entity "Question" {
     + id: INT
     + header: VARCHAR 
     + description: TEXT
+    + survey_id: INT
   }
 
    entity "Option" {
     + id: INT
-    + content: VARCHAR    
+    + content: VARCHAR
+    + questiron_id: INT    
   }
   
     entity "Answer" {
-    + id: INT  
+    + id: INT
+    + option_id: INT
+    + expert_id: INT  
   }
   
     entity "SurveyComplaint" {
     + id: INT
     + description: TEXT
     + date: DATETIME
+    + survey_id: INT
+    + expert_id: INT
   }
   
     entity "SurveyCategory"{
