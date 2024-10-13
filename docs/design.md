@@ -22,6 +22,10 @@ entity User.last_name <<TEXT>> #aaffaa
 entity User.email <<TEXT>> #aaffaa
 entity User.phone_number <<TEXT>> #aaffaa
 entity User.password <<TEXT>> #aaffaa
+entity User.description <<TEXT>> #aaffaa
+entity User.age <<NUMBER>> #aaffaa
+entity User.gender <<TEXT>> #aaffaa
+entity User.company <<TEXT>> #aaffaa
 entity User.is_admin <<NUMBER>> #aaffaa
 
 User.id -d-* User
@@ -30,25 +34,11 @@ User.last_name -d-* User
 User.email -d-* User
 User.phone_number -d-* User
 User.password -d-* User
+User.description -d-* User
+User.age -d-* User
+User.gender -d-* User
+User.company -d-* User
 User.is_admin -d-* User
-
-entity Researcher <<ENTITY>> #0044b0
-entity Researcher.id <<NUMBER>> #699ff5
-entity Researcher.company <<TEXT>> #699ff5
-
-Researcher.id -d-* Researcher
-Researcher.company -d-* Researcher
-
-entity Expert <<ENTITY>> #47442e
-entity Expert.id <<NUMBER>> #858063
-entity Expert.description <<TEXT>> #858063
-entity Expert.age <<NUMBER>> #858063
-entity Expert.gender <<TEXT>> #858063
-
-Expert.id -d-* Expert
-Expert.description -d-* Expert
-Expert.age -d-* Expert
-Expert.gender -d-* Expert
 
 entity SurveyComplaint <<ENTITY>> #f59e51
 entity SurveyComplaint.id <<NUMBER>> #FFDAB9
@@ -68,14 +58,14 @@ ExpertComplaint.id -u-* ExpertComplaint
 ExpertComplaint.description -u-* ExpertComplaint
 ExpertComplaint.date -u-* ExpertComplaint
 
-entity Survey <<ENTITY>> #448094
-entity Survey.id <<NUMBER>> #ADD8E6
-entity Survey.title <<TEXT>> #ADD8E6
-entity Survey.description <<TEXT>> #ADD8E6
-entity Survey.creation_date <<DATE>> #ADD8E6
-entity Survey.close_date <<DATE>> #ADD8E6
-entity Survey.is_changeable <<NUMBER>> #ADD8E6
-entity Survey.is_active <<NUMBER>> #ADD8E6
+entity Survey <<ENTITY>> #06bfbf
+entity Survey.id <<NUMBER>> #9effff
+entity Survey.title <<TEXT>> #9effff
+entity Survey.description <<TEXT>> #9effff
+entity Survey.creation_date <<DATE>> #9effff
+entity Survey.close_date <<DATE>> #9effff
+entity Survey.is_changeable <<NUMBER>> #9effff
+entity Survey.is_active <<NUMBER>> #9effff
 
 Survey.id -d-* Survey
 Survey.title -d-* Survey
@@ -94,12 +84,12 @@ Question.id -d-* Question
 Question.header -d-* Question
 Question.description -d-* Question
 
-entity Answer <<ENTITY>> #117d59
-entity Answer.id <<NUMBER>> #1ee8a4
-entity Answer.content <<TEXT>> #1ee8a4
+entity Option <<ENTITY>> #117d59
+entity Option.id <<NUMBER>> #1ee8a4
+entity Option.content <<TEXT>> #1ee8a4
 
-Answer.id -d-* Answer
-Answer.content -d-* Answer
+Option.id -d-* Option
+Option.content -d-* Option
 
 entity Category <<ENTITY>> #ab8c0c
 entity Category.id <<NUMBER>> #FFCC00
@@ -108,10 +98,10 @@ entity Category.name <<TEXT>> #FFCC00
 Category.id -u-* Category
 Category.name -u-* Category
 
-entity SelectedAnswer <<ENTITY>> #f74564
-entity SelectedAnswer.id <<NUMBER>> #FFC0CB
+entity Answer <<ENTITY>> #f74564
+entity Answer.id <<NUMBER>> #FFC0CB
 
-SelectedAnswer.id -d-* SelectedAnswer
+Answer.id -d-* Answer
 
 entity Expertise <<ENTITY>> #6f44c9
 entity Expertise.id <<NUMBER>> #a785ed
@@ -120,21 +110,26 @@ entity Expertise.expertise_rate <<NUMBER>> #a785ed
 Expertise.id -u-* Expertise
 Expertise.expertise_rate -u-* Expertise
 
+entity SurveyCategory <<ENTITY>> #448094
+entity SurveyCategory.id <<NUMBER>> #ADD8E6
 
-Researcher "0, 1" -u- "1, 1" User
-Expert "0, 1" -u- "1, 1" User
-Researcher "1, 1" -d- "0 .. *" Survey
-Researcher "1, 1" -d- "0 .. *" ExpertComplaint
-Survey "1, 1" -d- "1 .. *" Question
-Survey "0 .. *" -d- "1 .. *" Category
-Survey "1, 1" -d- "0 .. *" SurveyComplaint
-Question "1, 1" -u- "1 .. 10" Answer
-Answer "1, 1" -d- "0 .. *" SelectedAnswer
-SelectedAnswer "0 .. *" -d- "1, 1" Expert
-Expert "1, 1" -d- "0 .. *" SurveyComplaint
-ExpertComplaint "0 .. *" -u- "1, 1" Expert
-Expert "1, 1" -d- "1 .. *" Expertise
-Expertise "0 .. *" -u- "1, 1" Category
+SurveyCategory.id --* SurveyCategory
+
+
+User "1, 1" -- "0 .. *" Survey
+User "1, 1" -- "0 .. *" ExpertComplaint :expert
+Survey "1, 1" -- "1 .. *" Question
+Survey "1, 1" -- "0 .. *" SurveyCategory
+Category "1, 1" -- "1 .. *" SurveyCategory
+Survey "1, 1" -- "0 .. *" SurveyComplaint
+Question "1, 1" -- "0 .. *" Option
+Option "1, 1" -- "0 .. *" Answer
+Answer "0 .. *" -d- "1, 1" User
+User "1, 1" -- "0 .. *" SurveyComplaint
+ExpertComplaint "0 .. *" -u- "1, 1" User :researcher
+User "1, 1" -d- "1 .. *" Expertise
+Expertise "0 .. *" -- "1, 1" Category
+Category "1, 1" --o "0 .. *" Category
 
 @enduml
 ```
@@ -156,43 +151,14 @@ left to right direction
     + email: VARCHAR
     + phone_number: VARCHAR
     + password: VARCHAR 
-    + is_admin: TINYINT
-  }
-  
-  
-  entity "Researcher" {
-    + id: INT 
-    + company: VARCHAR
-    + user_id: INT
-    
-  }
-  
-  entity "Expert" {
-    + id: INT
     + description: TEXT
-    + age: INT 
+    + age: TINYINT
     + gender: VARCHAR
-    + user_id: INT
+    + company: VARCHAR
+    + is_admin: TINYINT 
   }
   
-  
-   entity "ExpertComplaint" {
-    + id: INT
-    + description: TEXT
-    + date: DATETIME
-    + researcher_id: INT
-    + expert_id: INT   
-  }
-  
-  entity "SurveyComplaint" {
-    + id: INT
-    + description: TEXT
-    + date: DATETIME
-    + researcher_id: INT
-    + expert_id: INT    
-  }
-  
-   entity "Survey" {
+     entity "Survey" {
     + id: INT
     + title: VARCHAR
     + description: TEXT 
@@ -202,26 +168,49 @@ left to right direction
     + is_active: TINYINT
     + owner_id: INT
   }
-
-   entity "Question" {
+  
+     entity "Question" {
     + id: INT
     + header: VARCHAR 
     + description: TEXT
     + survey_id: INT
   }
-  
-  entity "Answer" {
-    + id: INT 
-    + content: TEXT
-    + question_id: INT
-    
-  }
-  
-  entity "Category" {
-    + id: INT
-    + name: VARCHAR 
-  }
 
+   entity "Option" {
+    + id: INT
+    + content: TEXT
+    + questiron_id: INT    
+  }
+  
+    entity "Answer" {
+    + id: INT
+    + option_id: INT
+    + expert_id: INT  
+  }
+  
+    entity "SurveyComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+    + survey_id: INT
+    + expert_id: INT
+  }
+  
+    entity "SurveyCategory"{
+    + id: INT
+    + survey_id: INT
+    + category_id: INT
+    }
+  
+    entity "ExpertComplaint" {
+    + id: INT
+    + description: TEXT
+    + date: DATETIME
+    + researcher_id: INT
+    + expert_id: INT   
+  }
+  
+  
    entity "Expertise" {
     + id: INT 
     + expertise_rate: DOUBLE
@@ -229,36 +218,34 @@ left to right direction
     + category_id: INT
   }
   
-  entity "SelectedAnswer" {
-    + id: INT 
-    + expert_id: INT
-    + answer_id: INT
+  
+   entity "Category" {
+    + id: INT
+    + name: VARCHAR 
+    + parent_id: INT
   }
+  
+    "User" ||--o{ "Survey"
+    "User" ||--o{ "SurveyComplaint"
+    "User" ||--o{ "ExpertComplaint" : expert
+    "User" ||--o{ "ExpertComplaint" : researcher
+    "User" ||--|{ "Expertise"
     
-  
-  "User" ||--o| "Researcher"
-  "User" ||--o| "Expert"
-   
-  "Researcher" ||--o{ "ExpertComplaint"
-  "Researcher" ||--o{ "Survey"
- 
-  "Expert" ||--o{ "ExpertComplaint"
-  "Expert" ||--|{ "Expertise"
-  "Expert" ||--o{ "SelectedAnswer"
-  "Expert" ||--o{ "SurveyComplaint"
-  
-  "SurveyComplaint" }o--|| "Survey" 
-  
-  "Survey" ||--|{ "Question"
-  "Survey" }o--|{ "Category"
-  
-  "Question" ||--|{ "Answer"
-  
-  "SelectedAnswer" }o--|| "Answer"
-  
-  "Expertise" }o--|| "Category"
+    "Survey" ||--|{ "Question"
+    "Survey" ||--o{ "SurveyCategory"
+    "Survey" ||--o{ "SurveyComplaint"
+    
+    "Expertise" }o--|| "Category"
 
-  
+    "Question" ||--o{ "Option"
+    
+    "Option" ||--o{ "Answer"
+    
+    "Answer" }o--|| "User"
+    
+    "SurveyCategory" }|--|| "Category"
+    
+    "Category" ||--o{ "Category"
 
 @enduml
 ```
@@ -267,7 +254,7 @@ left to right direction
 ## Реляційна схема
 **Реляційна схема** - це набір таблиць, кожна з яких відповідає за одну з сутностей реляційної бази даних, та зв'язків між ними. Реляційна схема використовується для представлення реляційної бази даних. [[3]](https://www.sciencedirect.com/topics/computer-science/relational-schema#:~:text=A%20relational%20schema%20is%20a,applications%20belong%20to%20one%20schema.)
 
-![Реляційна схема](https://github.com/user-attachments/assets/1aee78d5-a66b-456c-92b1-e7f1ab6a3ecf)
+![Реляційна схема](https://github.com/user-attachments/assets/11482303-861b-4143-84f0-69268ed9e11d)
 
 
 
