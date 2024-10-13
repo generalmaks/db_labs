@@ -129,7 +129,7 @@ User "1, 1" -- "0 .. *" SurveyComplaint
 ExpertComplaint "0 .. *" -u- "1, 1" User :researcher
 User "1, 1" -d- "0 .. *" Expertise
 Expertise "0 .. *" -- "1, 1" Category
-Category "0, 1" --o "0 .. *" Category
+Category "0 .. *" --o "0, 1" Category
 
 @enduml
 ```
