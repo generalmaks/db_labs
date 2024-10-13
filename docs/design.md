@@ -254,7 +254,7 @@ left to right direction
 ## Реляційна схема
 **Реляційна схема** - це набір таблиць, кожна з яких відповідає за одну з сутностей реляційної бази даних, та зв'язків між ними. Реляційна схема використовується для представлення реляційної бази даних. [[3]](https://www.sciencedirect.com/topics/computer-science/relational-schema#:~:text=A%20relational%20schema%20is%20a,applications%20belong%20to%20one%20schema.)
 
-![Реляційна схема](https://github.com/user-attachments/assets/1aee78d5-a66b-456c-92b1-e7f1ab6a3ecf)
+![Реляційна схема](https://github.com/user-attachments/assets/11482303-861b-4143-84f0-69268ed9e11d)
 
 
 
