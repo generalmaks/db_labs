@@ -129,6 +129,7 @@ User "1, 1" -- "0 .. *" SurveyComplaint
 ExpertComplaint "0 .. *" -u- "1, 1" User :researcher
 User "1, 1" -d- "1 .. *" Expertise
 Expertise "0 .. *" -- "1, 1" Category
+Category "1, 1" -- "0 .. *" Category
 
 @enduml
 ```
@@ -151,7 +152,7 @@ left to right direction
     + phone_number: VARCHAR
     + password: VARCHAR 
     + description: TEXT
-    + age: VARCHAR
+    + age: TINYINT
     + gender: VARCHAR
     + company: VARCHAR
     + is_admin: TINYINT 
@@ -177,7 +178,7 @@ left to right direction
 
    entity "Option" {
     + id: INT
-    + content: VARCHAR
+    + content: TEXT
     + questiron_id: INT    
   }
   
@@ -221,6 +222,7 @@ left to right direction
    entity "Category" {
     + id: INT
     + name: VARCHAR 
+    + parent_id: INT
   }
   
     "User" ||--o{ "Survey"
@@ -242,6 +244,8 @@ left to right direction
     "Answer" }o--|| "User"
     
     "SurveyCategory" }|--|| "Category"
+    
+    "Category" ||--o{ "Category"
 
 @enduml
 ```
