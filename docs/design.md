@@ -225,7 +225,7 @@ left to right direction
     + parent_id: INT
   }
   
-    "User" ||--o{ "Survey"
+    "User" ||--o{ "Survey" :owner
     "User" ||--o{ "SurveyComplaint"
     "User" ||--o{ "ExpertComplaint" : expert
     "User" ||--o{ "ExpertComplaint" : researcher
