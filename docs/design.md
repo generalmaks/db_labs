@@ -118,7 +118,7 @@ SurveyCategory.id --* SurveyCategory
 
 User "1, 1" -- "0 .. *" Survey
 User "1, 1" -- "0 .. *" ExpertComplaint :expert
-Survey "1, 1" -- "1 .. *" Question
+Survey "1, 1" -- "0 .. *" Question
 Survey "1, 1" -- "0 .. *" SurveyCategory
 Category "1, 1" -- "1 .. *" SurveyCategory
 Survey "1, 1" -- "0 .. *" SurveyComplaint
@@ -127,9 +127,9 @@ Option "1, 1" -- "0 .. *" Answer
 Answer "0 .. *" -d- "1, 1" User
 User "1, 1" -- "0 .. *" SurveyComplaint
 ExpertComplaint "0 .. *" -u- "1, 1" User :researcher
-User "1, 1" -d- "1 .. *" Expertise
+User "1, 1" -d- "0 .. *" Expertise
 Expertise "0 .. *" -- "1, 1" Category
-Category "1, 1" --o "0 .. *" Category
+Category "0 .. *" --o "0, 1" Category
 
 @enduml
 ```
@@ -225,13 +225,13 @@ left to right direction
     + parent_id: INT
   }
   
-    "User" ||--o{ "Survey"
+    "User" ||--o{ "Survey" :owner
     "User" ||--o{ "SurveyComplaint"
     "User" ||--o{ "ExpertComplaint" : expert
     "User" ||--o{ "ExpertComplaint" : researcher
-    "User" ||--|{ "Expertise"
+    "User" ||--o{ "Expertise"
     
-    "Survey" ||--|{ "Question"
+    "Survey" ||--o{ "Question"
     "Survey" ||--o{ "SurveyCategory"
     "Survey" ||--o{ "SurveyComplaint"
     
@@ -245,7 +245,7 @@ left to right direction
     
     "SurveyCategory" }|--|| "Category"
     
-    "Category" ||--o{ "Category"
+    "Category" }o--o| "Category"
 
 @enduml
 ```
