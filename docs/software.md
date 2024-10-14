@@ -414,6 +414,10 @@ UPDATE survey SET close_date = "2024-12-14 23:59:59" WHERE id = 3;
 ```mysql
 -- Example DELETE queries
 DELETE FROM option_q WHERE id=13;
+
+DELETE s
+FROM survey AS s INNER JOIN surveycomplaint AS sc
+ON sc.survey_id = s.id;
 ```
 
 - RESTfull сервіс для управління даними
