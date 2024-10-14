@@ -408,6 +408,7 @@ WHERE expertise.expertise_rate = 5;
 ```mysql
 -- Example UPDATE queries
 UPDATE user SET email="kate.pril@gmail.com" WHERE id=1;
+UPDATE survey SET close_date = "2024-12-14 23:59:59" WHERE id = 3;
 ```
 
 ```mysql
