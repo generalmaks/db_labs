@@ -376,6 +376,33 @@ SELECT content, first_name, last_name FROM option_q INNER JOIN answer INNER JOIN
 SELECT name, first_name FROM expertise INNER JOIN user INNER JOIN category WHERE expertise_rate >=4 AND expertise.user_id = user.id AND category.id = expertise.category_id;
 SELECT ec.description, first_name FROM expertcomplaint AS ec, user AS u WHERE ec.expert_id = u.id;
 SELECT c.name, s.title FROM category AS c INNER JOIN survey AS s INNER JOIN surveycategory AS sc ON sc.survey_id = s.id AND sc.сategory_id = c.id;
+
+
+SELECT user.first_name, survey.title, survey.description
+FROM survey 
+INNER JOIN user
+ON survey.owner_id = user.id;
+
+SELECT user.first_name, expertise_rate, category.name
+FROM expertise
+RIGHT JOIN category
+ON expertise.category_id = category.id
+INNER JOIN user
+ON expertise.user_id = user.id
+ORDER BY user.first_name, category.name;
+
+SELECT survey.title, question.header
+FROM question
+INNER JOIN survey
+ON question.survey_id = survey.id;
+
+SELECT user.first_name, expertise.expertise_rate, category.name
+FROM expertise
+RIGHT JOIN category
+ON expertise.category_id = category.id
+INNER JOIN user
+ON expertise.user_id = user.id
+WHERE expertise.expertise_rate = 5;
 ```
 
 ```mysql
