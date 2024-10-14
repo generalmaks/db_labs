@@ -310,6 +310,7 @@ INSERT INTO category (name, parent_id) VALUES ("children psychology", 1);
 
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 1, 2);
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 6, 8);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (4.5, 5, 8);
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 5, 11);
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (2, 1, 4);
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (4.5, 2, 4);
