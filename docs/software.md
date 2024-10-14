@@ -283,5 +283,32 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
   ```
+
+```mysql
+-- Fill database with data
+ 
+```
+
+```mysql
+-- Example SELECT queries
+SELECT content FROM option_q WHERE question_id=5;
+SELECT first_name, last_name FROM user WHERE company IS NULL AND is_admin=0;
+
+SELECT content, first_name, last_name FROM option_q INNER JOIN answer INNER JOIN user WHERE option_q.id = answer.answer_id AND answer.expert_id = user.id;
+SELECT name, first_name FROM expertise INNER JOIN user INNER JOIN category WHERE expertise_rate >=4 AND expertise.user_id = user.id AND category.id = expertise.category_id;
+SELECT ec.description, first_name FROM expertcomplaint AS ec, user AS u WHERE ec.expert_id = u.id;
+SELECT c.name, s.title FROM category AS c INNER JOIN survey AS s INNER JOIN surveycategory AS sc ON sc.survey_id = s.id AND sc.сategory_id = c.id;
+```
+
+```mysql
+-- Example UPDATE queries
+UPDATE user SET email="kate.pril@gmail.com" WHERE id=1;
+```
+
+```mysql
+-- Example DELETE queries
+DELETE FROM option_q WHERE id=13;
+```
+
 - RESTfull сервіс для управління даними
 
