@@ -286,7 +286,84 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 ```mysql
 -- Fill database with data
- 
+ USE db_labs;
+
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin) 
+VALUES ("Dima", "Valai", "dima@gmail.com", "+380113223344", "jagiq273ty", 0);
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin) 
+VALUES ("Vasya", "Vasylenko", "vasya@gmail.com", "+380113223334", "jagiq2732y", 1);
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin) 
+VALUES ("Kate", "Pril", "kate@gmail.com", "+380112223344", "jagiq973ty", 1);
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin, description, age, gender) 
+VALUES ("John", "Doe", "john.doe@example.com", "+1234567890", "q23xttrfg", 0, "Expert in psychology with 10 years of experience in behavioral research.", 45, "Male");
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin, company) 
+VALUES ("Jane", "Smith", "jane.smith@example.com", "+0987654321", "gqd2ex3fc", 0, "MindTech Solutions");
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin, description, age, gender) 
+VALUES ("Alice", "Johnson", "alice.johnson@example.com", "+1987654321", "p9lmdsk34", 0, "Data analyst specializing in machine learning and data-driven decision making.", 30, "Female");
+
+INSERT INTO category (name) VALUES ("psychology");
+INSERT INTO category (name) VALUES ("math");
+INSERT INTO category (name) VALUES ("music");
+INSERT INTO category (name) VALUES ("machine learning");
+INSERT INTO category (name, parent_id) VALUES ("deep learning", 2);
+INSERT INTO category (name, parent_id) VALUES ("children psychology", 1);
+
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 1, 2);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 6, 8);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 5, 11);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (2, 1, 4);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (4.5, 2, 4);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 3, 4);
+
+INSERT INTO survey (title, description, creation_date, close_date, is_changable, is_active, owner_id) 
+VALUES ("Psychology Behavior Survey", "A survey focused on understanding behavioral patterns in adults.", 
+        '2024-10-14 09:00:00', '2024-11-14 23:59:59', 0, 1, 3);
+INSERT INTO survey (title, description, creation_date, close_date, is_changable, is_active, owner_id) 
+VALUES ("Discovery of the inheritance of Bach", "This survey explores the legacy and impact of Johann Sebastian Bach's compositions.", 
+        '2024-10-14 14:00:00', '2024-11-14 23:59:59', 0, 1, 8);
+INSERT INTO survey (title, description, creation_date, close_date, is_changable, is_active, owner_id) 
+VALUES ("Children Psychology Survey", "A survey aimed at understanding the psychological development of children.", 
+        '2024-10-14 10:00:00', '2024-12-01 23:59:59', 1, 1, 3);
+
+INSERT INTO surveycategory (survey_id, сategory_id) VALUES (1, 1);
+INSERT INTO surveycategory (survey_id, сategory_id) VALUES (2, 1);
+INSERT INTO surveycategory (survey_id, сategory_id) VALUES (1, 4);
+
+INSERT INTO question (header, description, survey_id) 
+VALUES 
+("How often do you experience stress?", "Please select the frequency that best matches your experience of stress.", 1),
+("How would you describe your overall emotional well-being?", "Rate your emotional well-being on a scale of 1 to 5.", 1);
+
+INSERT INTO question (header, description, survey_id) 
+VALUES 
+("How does the child interact with peers?", "Select the option that best describes the child’s social interactions.", 2),
+("How does the child usually respond to stressful situations?", "Select the typical response the child has to stress.", 2);
+
+INSERT INTO option_q (content, question_id) VALUES ("Never", 3);
+INSERT INTO option_q (content, question_id) VALUES ("Sometimes", 3);
+INSERT INTO option_q (content, question_id) VALUES ("Always", 3);
+INSERT INTO option_q (content, question_id) VALUES ("1", 4);
+INSERT INTO option_q (content, question_id) VALUES ("2", 4);
+INSERT INTO option_q (content, question_id) VALUES ("3", 4);
+INSERT INTO option_q (content, question_id) VALUES ("5", 4);
+INSERT INTO option_q (content, question_id) VALUES ("Very friendly", 5);
+INSERT INTO option_q (content, question_id) VALUES ("Neutral", 5);
+INSERT INTO option_q (content, question_id) VALUES ("Aggressive", 5);
+INSERT INTO option_q (content, question_id) VALUES ("Remains calm", 6);
+INSERT INTO option_q (content, question_id) VALUES ("Shows moderate anxiety", 6);
+INSERT INTO option_q (content, question_id) VALUES ("Has a breakdown", 6);
+
+INSERT INTO answer (answer_id, expert_id) VALUES (2, 2);
+INSERT INTO answer (answer_id, expert_id) VALUES (3, 4);
+INSERT INTO answer (answer_id, expert_id) VALUES (5, 2);
+INSERT INTO answer (answer_id, expert_id) VALUES (6, 4);
+INSERT INTO answer (answer_id, expert_id) VALUES (8, 4);
+INSERT INTO answer (answer_id, expert_id) VALUES (12, 4);
+
+INSERT INTO expertcomplaint (description, date, researcher_id, expert_id)
+VALUES ('Complaint regarding expert feedback', '2024-10-14 09:30:00', 3, 4);
+INSERT INTO surveycomplaint (description, date, survey_id, expert_id)
+VALUES ('Complaint about survey data handling by expert', '2024-10-14 09:30:00', 1, 2); 
 ```
 
 ```mysql
