@@ -10,20 +10,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema DB_labs
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema DB_labs
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `DB_labs` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
--- Schema demo_db
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema demo_db
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `demo_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `DB_labs` ;
 
 -- -----------------------------------------------------
 -- Table `DB_labs`.`User`
@@ -241,47 +229,10 @@ CREATE TABLE IF NOT EXISTS `DB_labs`.`SurveyCategory` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-USE `demo_db` ;
-
--- -----------------------------------------------------
--- Table `demo_db`.`positions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo_db`.`positions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `demo_db`.`employees`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `demo_db`.`employees` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `lastName` VARCHAR(128) NOT NULL,
-  `firstName` VARCHAR(128) NOT NULL,
-  `birthDate` DATE NOT NULL,
-  `positionId` INT NOT NULL,
-  `phone` VARCHAR(32) NOT NULL,
-  `salary` DECIMAL(8,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `positionId` (`positionId` ASC) VISIBLE,
-  CONSTRAINT `employees_ibfk_1`
-    FOREIGN KEY (`positionId`)
-    REFERENCES `demo_db`.`positions` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
   ```
 
 ```mysql
