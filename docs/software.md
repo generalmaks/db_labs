@@ -315,7 +315,75 @@ INSERT INTO answer (option_id, expert_id) VALUES (12, 4);
 INSERT INTO expertcomplaint (description, date, researcher_id, expert_id)
 VALUES ('Complaint regarding expert feedback', '2024-10-14 09:30:00', 3, 4);
 INSERT INTO surveycomplaint (description, date, survey_id, expert_id)
-VALUES ('Complaint about survey data handling by expert', '2024-10-14 09:30:00', 1, 2); 
+VALUES ('Complaint about survey data handling by expert', '2024-10-14 09:30:00', 1, 2);
+
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, age, gender)
+VALUES("Maksim", "Zinets", "Makson@example.com", "+123124124", "1234567890", 1, 18, "Male");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES("Immanuel", "Kant", "critic@example.com", "+14881488", "0987654321", 0, "No description given", 52, "Male", "Phenomen Industries");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, age, gender)
+VALUES("Friedrich", "Nietzsche", "ubermensch@example.com", "+1357924680", "securepassword", 0, 56, "Male");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES("Margaret", "Thatcher", "godsavethequeen@example.com", "+23469346", "26343464", 0, "British Statewoman", 88, "Female", "British Parliament");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES("Napoleon", "Bonaparte", "vivalafrance@example.com", "+11111111", "11111111", 0, "Emperor of France", 45, "Male", "French Empire");
+
+INSERT INTO category (name) VALUES("IT");
+INSERT INTO category (name) VALUES("Philosophy");
+INSERT INTO category (name) VALUES("Politics");
+INSERT INTO category (name, parent_id) VALUES("Analytical philosophy", 2);
+INSERT INTO category (name, parent_id) VALUES("Continental philosophy", 2);
+INSERT INTO category (name, parent_id) VALUES("Conquests", 3);
+
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 2, 2);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (1, 1, 1);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 4, 2);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (4, 2, 3);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 5, 3);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (3, 3, 4);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 3, 5);
+INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 6, 5);
+
+INSERT INTO survey(title, description, creation_date, close_date, is_changable, is_active, owner_id)
+VALUES("Pure reason critique", "This test is to show your knowledge about pure reason critique", '2024-11-14 23:59:59', '2024-12-14 23:59:59', 1, 1, 2);
+INSERT INTO survey(title, description, creation_date, close_date, is_changable, is_active, owner_id)
+VALUES("Margaret Thatcher presidency", "In this survey, we want you to rate Margaret Thatcher policies as a prime-minister", '1979-5-4 8:00:00', '1900-11-28 23:59:59', 0, 0, 4);
+
+INSERT INTO surveycategory(сategory_id, survey_id) VALUES (2, 1);
+INSERT INTO surveycategory(сategory_id, survey_id) VALUES (4, 1);
+INSERT INTO surveycategory(сategory_id, survey_id) VALUES (3, 2);
+
+INSERT INTO question(header, description, survey_id)
+VALUES("Economic policies", "How are you satisfied with Thatchers economic policies?", 2);
+INSERT INTO option_q(content, question_id)
+VALUES("Very satisfied", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("Satisfied", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("It didn`t affect me", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("Unsatisfied", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("Very unsatisfied", 1);
+
+INSERT INTO question(header, description, survey_id)
+VALUES("What is phenomenon in Kant`s philosophy?", "There`s only one right answer", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("An object that exists independently of our perception", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("An object as it appears in our experience through the senses and cognitive faculties", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("An abstract idea, unrelated to actual perception", 1);
+INSERT INTO option_q(content, question_id)
+VALUES("An emotional reaction of a person to external objects", 1);
+
+INSERT INTO answer (answer_id, expert_id) VALUES(7, 2);
+
+INSERT INTO expertcomplaint (description, date, researcher_id, expert_id)
+VALUES ('Complaint about expert`s options are biased', '2024-10-14 09:30:00', 4, 3);
+INSERT INTO surveycomplaint (description, date, survey_id, expert_id)
+
+VALUES ('Complaint about test`s complication', '2024-10-14 09:30:00', 2, 2);
 ```
 
 ```mysql
