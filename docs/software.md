@@ -187,14 +187,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_labs`.`Answer` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `answer_id` INT UNSIGNED NOT NULL,
+  `option_id` INT UNSIGNED NOT NULL,
   `expert_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`, `answer_id`, `expert_id`),
+  PRIMARY KEY (`id`, `option_id`, `expert_id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `answer_id_idx` (`answer_id` ASC) VISIBLE,
+  INDEX `answer_id_idx` (`option_id` ASC) VISIBLE,
   INDEX `fk_Answer_User2_idx` (`expert_id` ASC) VISIBLE,
   CONSTRAINT `fk_option_id`
-    FOREIGN KEY (`answer_id`)
+    FOREIGN KEY (`option_id`)
     REFERENCES `DB_labs`.`Option_q` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -305,12 +305,12 @@ INSERT INTO option_q (content, question_id) VALUES ("Remains calm", 6);
 INSERT INTO option_q (content, question_id) VALUES ("Shows moderate anxiety", 6);
 INSERT INTO option_q (content, question_id) VALUES ("Has a breakdown", 6);
 
-INSERT INTO answer (answer_id, expert_id) VALUES (2, 2);
-INSERT INTO answer (answer_id, expert_id) VALUES (3, 4);
-INSERT INTO answer (answer_id, expert_id) VALUES (5, 2);
-INSERT INTO answer (answer_id, expert_id) VALUES (6, 4);
-INSERT INTO answer (answer_id, expert_id) VALUES (8, 4);
-INSERT INTO answer (answer_id, expert_id) VALUES (12, 4);
+INSERT INTO answer (option_id, expert_id) VALUES (2, 2);
+INSERT INTO answer (option_id, expert_id) VALUES (3, 4);
+INSERT INTO answer (option_id, expert_id) VALUES (5, 2);
+INSERT INTO answer (option_id, expert_id) VALUES (6, 4);
+INSERT INTO answer (option_id, expert_id) VALUES (8, 4);
+INSERT INTO answer (option_id, expert_id) VALUES (12, 4);
 
 INSERT INTO expertcomplaint (description, date, researcher_id, expert_id)
 VALUES ('Complaint regarding expert feedback', '2024-10-14 09:30:00', 3, 4);
