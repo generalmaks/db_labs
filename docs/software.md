@@ -417,6 +417,35 @@ ON expertise.category_id = category.id
 INNER JOIN user
 ON expertise.user_id = user.id
 WHERE expertise.expertise_rate = 5;
+
+SELECT first_name, last_name FROM user WHERE age > 52;
+SELECT id FROM question WHERE header LIKE "Economic policies";
+SELECT answer_id FROM answer WHERE id > 2 AND expert_id = 2;
+SELECT * FROM user ORDER BY first_name asc ;
+
+UPDATE survey SET title = "Psychological skills" WHERE id = 3;
+UPDATE survey SET title = "Best woman" WHERE owner_id = 2;
+UPDATE user SET first_name = "Donald" WHERE first_name = "Friedrich";
+
+DELETE FROM user WHERE id=5;
+
+SELECT user.first_name, user.last_name, survey.title, survey.description
+FROM user INNER JOIN survey
+    ON user.id = survey.owner_id
+WHERE user.id < 4;
+
+
+SELECT user.first_name, user.last_name,category.name, expertise.expertise_rate
+FROM user INNER JOIN expertise
+ON user.id = expertise.user_id
+LEFT JOIN category
+    ON  expertise.category_id=category.id;
+
+
+SELECT  question.header, survey.title
+FROM question RIGHT JOIN survey
+ON survey.id = question.survey_id
+
 ```
 
 ```mysql
