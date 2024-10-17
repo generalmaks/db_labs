@@ -268,6 +268,10 @@ INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin,
 VALUES("Napoleon", "Bonaparte", "vivalafrance@example.com", "+11111111", "11111111", 0, "Emperor of France", 45, "Male", "French Empire");
 INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
 VALUES ("Andrii", "Solomka", "asolomka@gmail.com", "+3806666666", "12345", 1, "Node js developer", 52, "Male", "Donbass Coil");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES("Loli", "Crop", "brawlstars@example.com", "+774329602", "pididivdidi", 0, "Beer-drink master", 25, "Male", "Beer World");
+INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES("Andrii", "Cruco", "kapibara@example.com", "+0664326434", "********", 0, "Non expert expert", 39, "Male", "Beer World");
 
 
 
@@ -283,6 +287,8 @@ INSERT INTO category (name) VALUES("Politics");
 INSERT INTO category (name, parent_id) VALUES("Analytical philosophy", 2);
 INSERT INTO category (name, parent_id) VALUES("Continental philosophy", 2);
 INSERT INTO category (name, parent_id) VALUES("Conquests", 3);
+INSERT INTO category (name, parent_id) VALUES("Backend development", 7);
+INSERT INTO category (name) VALUES("Physics");
 
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 1, 2);
 INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (5, 6, 8);
@@ -299,6 +305,10 @@ INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 5, 3);
 INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (3, 3, 4);
 INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 3, 5);
 INSERT INTO expertise(expertise_rate, category_id, user_id) VALUES (5, 6, 5);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (4, 13, 14);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (4, 14, 14);
+INSERT INTO expertise (expertise_rate, category_id, user_id) VALUES (2, 14, 13);
+
 
 INSERT INTO survey (title, description, creation_date, close_date, is_changable, is_active, owner_id) 
 VALUES ("Psychology Behavior Survey", "A survey focused on understanding behavioral patterns in adults.", 
@@ -313,6 +323,9 @@ INSERT INTO survey(title, description, creation_date, close_date, is_changable, 
 VALUES("Pure reason critique", "This test is to show your knowledge about pure reason critique", '2024-11-14 23:59:59', '2024-12-14 23:59:59', 1, 1, 2);
 INSERT INTO survey(title, description, creation_date, close_date, is_changable, is_active, owner_id)
 VALUES("Margaret Thatcher presidency", "In this survey, we want you to rate Margaret Thatcher policies as a prime-minister", '1979-5-4 8:00:00', '1900-11-28 23:59:59', 0, 0, 4);
+INSERT INTO survey (title, description, creation_date, close_date, is_changable, is_active, owner_id)
+VALUES ("Importance of physics", "A survey focused on importance of physics for people.",
+        '2024-10-14 23:00:00', '2024-11-16 23:59:59', 0, 1, 14);
 
 INSERT INTO surveycategory (survey_id, category_id) VALUES (1, 1);
 INSERT INTO surveycategory (survey_id, category_id) VALUES (2, 1);
@@ -334,6 +347,10 @@ INSERT INTO question(header, description, survey_id)
 VALUES("Economic policies", "How are you satisfied with Thatchers economic policies?", 2);
 INSERT INTO question(header, description, survey_id)
 VALUES("What is phenomenon in Kant`s philosophy?", "There`s only one right answer", 1);
+INSERT INTO question (header, description, survey_id)
+VALUES
+("Physics is important?", "Many people mean that physics is unimportant. Do you think so?", 6),
+("How dificult is it to answer the previous question?", "Scale of 1 to 5.", 6);
 
 INSERT INTO option_q(content, question_id)
 VALUES("An object that exists independently of our perception", 1);
@@ -362,6 +379,12 @@ INSERT INTO option_q (content, question_id) VALUES ("Aggressive", 5);
 INSERT INTO option_q (content, question_id) VALUES ("Remains calm", 6);
 INSERT INTO option_q (content, question_id) VALUES ("Shows moderate anxiety", 6);
 INSERT INTO option_q (content, question_id) VALUES ("Has a breakdown", 6);
+INSERT INTO option_q(content, question_id) VALUES("Yes", 7);
+INSERT INTO option_q(content, question_id) VALUES("No", 7);
+INSERT INTO option_q(content, question_id) VALUES("Easy", 8);
+INSERT INTO option_q(content, question_id) VALUES("Medium", 8);
+INSERT INTO option_q(content, question_id) VALUES("Hard", 8);
+
 
 
 INSERT INTO answer (answer_id, expert_id) VALUES (2, 2);
@@ -371,6 +394,8 @@ INSERT INTO answer (answer_id, expert_id) VALUES (6, 4);
 INSERT INTO answer (answer_id, expert_id) VALUES (8, 4);
 INSERT INTO answer (answer_id, expert_id) VALUES (12, 4);
 INSERT INTO answer (answer_id, expert_id) VALUES(7, 2);
+INSERT INTO answer (answer_id, expert_id) VALUES(24, 13);
+INSERT INTO answer (answer_id, expert_id) VALUES(27, 13);
 
 INSERT INTO expertcomplaint (description, date, researcher_id, expert_id)
 VALUES ('Complaint regarding expert feedback', '2024-10-14 09:30:00', 3, 4);
@@ -387,6 +412,7 @@ VALUES ('Complaint about test`s complication', '2024-10-14 09:30:00', 2, 2);
 INSERT INTO surveycategory (id, survey_id, category_id) VALUES (7, 5, 11);
 INSERT INTO surveycategory (id, survey_id, category_id) VALUES (8, 3, 1);
 INSERT INTO surveycategory (id, survey_id, category_id) VALUES (9, 2, 7);
+INSERT INTO surveycategory (survey_id, category_id) VALUES (6, 14);
 ```
 
 ```mysql
