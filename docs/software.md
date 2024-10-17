@@ -383,6 +383,10 @@ VALUES ('Complaint about expert`s options are biased', '2024-10-14 09:30:00', 4,
 INSERT INTO surveycomplaint (description, date, survey_id, expert_id)
 
 VALUES ('Complaint about test`s complication', '2024-10-14 09:30:00', 2, 2);
+
+INSERT INTO surveycategory (id, survey_id, category_id) VALUES (7, 5, 11);
+INSERT INTO surveycategory (id, survey_id, category_id) VALUES (8, 3, 1);
+INSERT INTO surveycategory (id, survey_id, category_id) VALUES (9, 2, 7);
 ```
 
 ```mysql
@@ -399,6 +403,12 @@ SELECT first_name, last_name FROM user WHERE age > 52;
 SELECT id FROM question WHERE header LIKE "Economic policies";
 SELECT answer_id FROM answer WHERE id > 2 AND expert_id = 2;
 SELECT * FROM user ORDER BY first_name asc ;
+
+SELECT title FROM survey WHERE owner_id=3;
+SELECT title FROM survey WHERE owner_id = (SELECT id FROM user WHERE email = 'critic@example.com');
+SELECT name FROM category WHERE parent_id=2;
+SELECT name from category WHERE parent_id=2 OR parent_id IS NULL;
+SELECT email FROM user WHERE is_admin=1;
 
 SELECT user.first_name, survey.title, survey.description
 FROM survey 
@@ -437,6 +447,29 @@ SELECT user.first_name, user.last_name,category.name, expertise.expertise_rate
 FROM user INNER JOIN expertise ON user.id = expertise.user_id
 LEFT JOIN category ON  expertise.category_id=category.id;
 
+SELECT survey.title AS survey_title,
+       question.header AS question_header,
+       question.description AS question_description
+FROM survey INNER JOIN question ON survey.id = question.survey_id;
+
+SELECT survey.title AS survey_title,
+       surveycomplaint.description AS survey_complaint
+FROM survey LEFT JOIN surveycomplaint ON survey.id = surveycomplaint.survey_id;
+
+SELECT expertise.expertise_rate,
+       user.first_name AS user_first_name
+FROM expertise CROSS JOIN user ON expertise.user_id = user.id;
+
+SELECT category.name AS category_name,
+       user.email AS user_email,
+       user.is_admin AS user_admin_status,
+       expertise.expertise_rate
+FROM user
+RIGHT JOIN expertise ON expertise.user_id = user.id
+LEFT JOIN category ON category.id = expertise.category_id
+WHERE expertise.expertise_rate > (SELECT AVG(expertise_rate) FROM expertise)
+AND user.is_admin = 1;
+
 
 
 ```
@@ -449,6 +482,10 @@ UPDATE survey SET close_date = "2024-12-14 23:59:59" WHERE id = 3;
 UPDATE survey SET title = "Psychological skills" WHERE id = 3;
 UPDATE survey SET title = "Best woman" WHERE owner_id = 2;
 UPDATE user SET first_name = "Donald" WHERE first_name = "Friedrich";
+
+UPDATE surveycategory SET survey_id=4 WHERE id=3;
+UPDATE surveycategory SET category_id=1 WHERE survey_id=3;
+UPDATE db_labs.expertise SET expertise_rate=3.5, user_id=11 WHERE category_id=4;
 ```
 
 ```mysql
@@ -459,6 +496,8 @@ DELETE FROM user WHERE id=5;
 DELETE s
 FROM survey AS s INNER JOIN surveycomplaint AS sc
 ON sc.survey_id = s.id;
+
+DELETE FROM surveycategory WHERE id=9;
 
 ```
 
