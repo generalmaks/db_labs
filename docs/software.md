@@ -496,7 +496,33 @@ LEFT JOIN category ON category.id = expertise.category_id
 WHERE expertise.expertise_rate > (SELECT AVG(expertise_rate) FROM expertise)
 AND user.is_admin = 1;
 
+-- Count owner's number of surveys
+SELECT COUNT(id) FROM survey WHERE owner_id = 1;
 
+-- Get sorted categories
+SELECT name FROM category ORDER BY name;
+
+-- Count number of answers per every option_q in survey
+SELECT content, COUNT(expert_id) AS answer_count
+FROM answer
+RIGHT JOIN option_q ON answer.answer_id = option_q.id
+WHERE question_id = 7
+GROUP BY content;
+
+-- Get all expert responses to the survey
+SELECT header AS question_header, content AS answer_name
+FROM answer
+JOIN option_q ON answer.answer_id = option_q.id
+JOIN question ON option_q.question_id = question.id
+WHERE expert_id = 13 AND survey_id = 6
+ORDER BY question.id;
+
+-- Get experts with higher expertise_rate than average
+SELECT user.id, CONCAT(first_name, " ", last_name), expertise_rate
+FROM expertise
+JOIN user ON expertise.user_id = user.id
+WHERE expertise_rate > (SELECT AVG(expertise_rate) FROM expertise WHERE category_id =14)
+AND category_id = 14;
 
 ```
 
