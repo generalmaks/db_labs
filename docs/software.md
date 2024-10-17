@@ -434,21 +434,15 @@ UPDATE user SET first_name = "Donald" WHERE first_name = "Friedrich";
 DELETE FROM user WHERE id=5;
 
 SELECT user.first_name, user.last_name, survey.title, survey.description
-FROM user INNER JOIN survey
-    ON user.id = survey.owner_id
+FROM user INNER JOIN survey ON user.id = survey.owner_id
 WHERE user.id < 4;
 
-
 SELECT user.first_name, user.last_name,category.name, expertise.expertise_rate
-FROM user INNER JOIN expertise
-ON user.id = expertise.user_id
-LEFT JOIN category
-    ON  expertise.category_id=category.id;
-
+FROM user INNER JOIN expertise ON user.id = expertise.user_id
+LEFT JOIN category ON  expertise.category_id=category.id;
 
 SELECT  question.header, survey.title
-FROM question RIGHT JOIN survey
-ON survey.id = question.survey_id
+FROM question RIGHT JOIN survey ON survey.id = question.survey_id
 
 ```
 
