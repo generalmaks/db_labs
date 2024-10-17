@@ -266,6 +266,10 @@ INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin,
 VALUES("Margaret", "Thatcher", "godsavethequeen@example.com", "+23469346", "26343464", 0, "British Statewoman", 88, "Female", "British Parliament");
 INSERT INTO User(first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
 VALUES("Napoleon", "Bonaparte", "vivalafrance@example.com", "+11111111", "11111111", 0, "Emperor of France", 45, "Male", "French Empire");
+INSERT INTO user (first_name, last_name, email, phone_number, password, is_admin, description, age, gender, company)
+VALUES ("Andrii", "Solomka", "asolomka@gmail.com", "+3806666666", "12345", 1, "Node js developer", 52, "Male", "Donbass Coil");
+
+
 
 INSERT INTO category (name) VALUES ("psychology");
 INSERT INTO category (name) VALUES ("math");
