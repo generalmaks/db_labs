@@ -517,6 +517,7 @@ UPDATE db_labs.expertise SET expertise_rate=3.5, user_id=11 WHERE category_id=4;
 ```mysql
 -- Example DELETE queries
 DELETE FROM option_q WHERE id=13;
+DELETE FROM option_q WHERE content = "Yes" AND question_id = 7;
 DELETE FROM user WHERE id=5;
 
 DELETE s
