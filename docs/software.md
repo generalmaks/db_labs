@@ -1,7 +1,6 @@
 # Реалізація інформаційного та програмного забезпечення
 
-В рамках проекту розробляється: 
-- SQL-скрипт для створення на початкового наповнення бази даних
+## SQL-скрипт для створення на початкового наповнення бази даних
 ```mysql
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -569,5 +568,5 @@ DELETE FROM user WHERE id=5;
 DELETE FROM surveycategory WHERE id=9;
 ```
 
-- RESTfull сервіс для управління даними
+## RESTfull сервіс для управління даними
 
