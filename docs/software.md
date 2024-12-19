@@ -570,3 +570,1364 @@ DELETE FROM surveycategory WHERE id=9;
 
 ### RESTfull сервіс для управління даними
 
+#### Entities
+##### CategoryEntity
+````C#
+namespace RestApiLab6.Entities;
+
+public class CategoryEntity
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int? ParentId { get; set; }
+    public CategoryEntity Parent { get; set; }
+}
+````
+##### ExpertiseEntity
+````C#
+namespace RestApiLab6.Entities;
+
+public class ExpertiseEntity
+{
+    public int Id { get; set; }
+    public double ExpertiseRate { get; set; }
+    public int CategoryId { get; set; }
+    public CategoryEntity CategoryEntity { get; set; }
+    public int UserId { get; set; }
+    public UserEntity UserEntity { get; set; }
+}
+````
+##### SurveyEntity
+````C#
+namespace RestApiLab6.Entities;
+
+public class SurveyEntity
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string? Description { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime? CloseDate { get; set; }
+    public bool IsChangable { get; set; }
+    public bool IsActive { get; set; }
+    public int OwnerId { get; set; }
+    public UserEntity Owner { get; set; }
+}
+````
+##### UserEntity
+````C#
+namespace RestApiLab6.Entities;
+
+public class UserEntity
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public string Password { get; set; }
+    public bool IsAdmin { get; set; }
+    public string? Description { get; set; }
+    public int? Age { get; set; }
+    public string? Gender { get; set; }
+    public string? Company { get; set; }
+    public List<ExpertiseEntity> Expertises { get; set; }
+    public List<SurveyEntity> Surveys { get; set; }
+}
+````
+#### Configurations
+##### CategoryConfiguration
+````C#
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Configurations;
+
+public class CategoryConfiguration : IEntityTypeConfiguration<CategoryEntity>
+{
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+    {
+        builder.ToTable("category");
+
+        builder.HasKey(c => c.Id)
+            .HasName("PK");
+
+        builder.Property(c => c.Id)
+            .IsRequired()
+            .HasColumnName("id");
+
+        builder.Property(c => c.Name)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("name");
+
+        builder.Property(c => c.ParentId)
+            .HasColumnName("parent_id");
+
+        builder.HasOne(c => c.Parent)
+            .WithMany()
+            .HasForeignKey(c => c.ParentId);
+    }
+}
+````
+##### ExpertiseConfiguration
+````C#
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Configurations;
+
+public class ExpertiseConfiguration : IEntityTypeConfiguration<ExpertiseEntity>
+{
+    public void Configure(EntityTypeBuilder<ExpertiseEntity> builder)
+    {
+        builder.ToTable("expertise");
+
+        builder.HasKey(e => new { e.Id, e.CategoryId, e.UserId }).HasName("PK");
+
+        builder.Property(e => e.Id)
+            .ValueGeneratedOnAdd()
+            .HasColumnName("id");
+
+        builder.Property(e => e.ExpertiseRate)
+            .IsRequired()
+            .HasColumnName("expertise_rate");
+
+        builder.Property(e => e.UserId)
+            .IsRequired()
+            .HasColumnName("user_id");
+
+        builder.Property(e => e.CategoryId)
+            .IsRequired()
+            .HasColumnName("category_id");
+
+        builder.HasOne(e => e.UserEntity)
+            .WithMany(u => u.Expertises)
+            .HasForeignKey(e => e.UserId);
+
+        builder.HasOne(e => e.CategoryEntity)
+            .WithMany()
+            .HasForeignKey(e => e.CategoryId);
+    }
+}
+````
+##### SurveyConfiguration
+````C#
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Configurations;
+
+public class SurveyConfiguration : IEntityTypeConfiguration<SurveyEntity>
+{
+    public void Configure(EntityTypeBuilder<SurveyEntity> builder)
+    {
+        builder.ToTable("survey");
+
+        builder.HasKey(s => s.Id)
+            .HasName("PK");
+
+        builder.Property(s => s.Id)
+            .IsRequired()
+            .HasColumnName("id");
+
+        builder.Property(s => s.Title)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("title");
+
+        builder.Property(s => s.Description)
+            .HasColumnType("text")
+            .HasColumnName("description");
+
+        builder.Property(s => s.CreationDate)
+            .IsRequired()
+            .HasColumnName("creation_date");
+
+        builder.Property(s => s.CloseDate)
+            .HasColumnName("close_date");
+
+        builder.Property(s => s.IsChangable)
+            .IsRequired()
+            .HasColumnType("tinyint(1)")
+            .HasColumnName("is_chaneable");
+
+        builder.Property(s => s.IsActive)
+            .IsRequired()
+            .HasColumnType("tinyint(1)")
+            .HasColumnName("is_active");
+
+        builder.Property(s => s.OwnerId)
+            .HasColumnName("owner_id");
+
+        builder.HasOne(s => s.Owner)
+            .WithMany(u => u.Surveys)
+            .HasForeignKey(s => s.OwnerId);
+    }
+}
+````
+##### UserConfiguration
+````C#
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Configurations;
+
+public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
+{
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    {
+        builder.ToTable("user");
+
+        builder.HasKey(u => u.Id)
+            .HasName("PK");
+
+        builder.Property(u => u.Id)
+            .HasColumnName("id")
+            .IsRequired();
+
+        builder.Property(u => u.FirstName)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("first_name");
+
+        builder.Property(u => u.LastName)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("last_name");
+
+        builder.Property(u => u.Email)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("email");
+
+        builder.Property(u => u.PhoneNumber)
+            .HasMaxLength(45)
+            .HasColumnName("phone_number");
+
+        builder.Property(u => u.Password)
+            .HasMaxLength(45)
+            .IsRequired()
+            .HasColumnName("password");
+
+        builder.Property(u => u.IsAdmin)
+            .HasColumnType("tinyint(1)")
+            .IsRequired()
+            .HasColumnName("is_admin");
+
+        builder.Property(u => u.Description)
+            .HasColumnType("text")
+            .HasColumnName("description");
+
+        builder.Property(u => u.Age)
+            .HasColumnName("age");
+
+        builder.Property(u => u.Gender)
+            .HasMaxLength(45)
+            .HasColumnName("gender");
+
+        builder.Property(u => u.Company)
+            .HasMaxLength(45)
+            .HasColumnName("company");
+    }
+}
+````
+#### Models
+##### Category
+````C#
+namespace RestApiLab6.Models;
+
+public class Category
+{
+    public Category(string name, int? parentId)
+    {
+        Name = name;
+        ParentId = parentId;
+    }
+
+    public string Name { get; }
+    public int? ParentId { get; }
+}
+````
+##### Expertise
+````C#
+namespace RestApiLab6.Models;
+
+public class Expertise
+{
+public Expertise(double expertiseRate, int categoryId, int userId)
+{
+ExpertiseRate = expertiseRate;
+CategoryId = categoryId;
+UserId = userId;
+}
+
+    public double ExpertiseRate { get; }
+    public int CategoryId { get; }
+    public int UserId { get; }
+}
+````
+##### Survey
+````c#
+namespace RestApiLab6.Models;
+
+public class Survey
+{
+    public Survey(string title, string? description, DateTime creationDate, DateTime? closeDate, bool isChangable,
+        bool isActive, int ownerId)
+    {
+        Title = title;
+        Description = description;
+        CreationDate = creationDate;
+        CloseDate = closeDate;
+        IsChangable = isChangable;
+        IsActive = isActive;
+        OwnerId = ownerId;
+    }
+
+    public string Title { get; }
+    public string? Description { get; }
+    public DateTime CreationDate { get; }
+    public DateTime? CloseDate { get; }
+    public bool IsChangable { get; }
+    public bool IsActive { get; }
+    public int OwnerId { get; }
+}
+````
+##### User
+````c#
+namespace RestApiLab6.Models;
+
+public class User
+{
+    public User(string firstName, string lastName, string email, string phoneNumber, string password, bool isAdmin,
+        string description,
+        int? age, string gender, string company)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        Password = password;
+        IsAdmin = isAdmin;
+        Description = description;
+        Age = age;
+        Gender = gender;
+        Company = company;
+    }
+
+    public string FirstName { get; }
+    public string LastName { get; }
+    public string Email { get; }
+    public string? PhoneNumber { get; }
+    public string Password { get; }
+    public bool IsAdmin { get; }
+    public string? Description { get; }
+    public int? Age { get; }
+    public string? Gender { get; }
+    public string? Company { get; }
+}
+````
+
+
+##### IdentifiedCategory
+````c#
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Models;
+
+public class IdentifiedCategory : Category, IHasId
+{
+    public IdentifiedCategory(int id, string name, int? parentId = null) : base(name, parentId)
+    {
+        Id = id;
+    }
+
+    public IdentifiedCategory(CategoryEntity c) : this(c.Id, c.Name, c.ParentId)
+    {
+    }
+
+    public int Id { get; }
+}
+````
+##### IdentifiedExpertise
+````c#
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Models;
+
+public class IdentifiedExpertise : Expertise, IHasId
+{
+    public IdentifiedExpertise(int id, double expertiseRate, int categoryId, int userId)
+        : base(expertiseRate, categoryId, userId)
+    {
+        Id = id;
+    }
+
+    public IdentifiedExpertise(ExpertiseEntity e) : this(e.Id, e.ExpertiseRate, e.CategoryId, e.UserId)
+    {
+    }
+
+    public int Id { get; }
+}
+````
+##### IdentifiedSurver
+````c#
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Models;
+
+public class IdentifiedSurvey : Survey, IHasId
+{
+    public IdentifiedSurvey(int id, string title, string? description, DateTime creationDate, DateTime? closeDate,
+        bool isChangable, bool isActive, int ownerId)
+        : base(title, description, creationDate, closeDate, isChangable, isActive, ownerId)
+    {
+        Id = id;
+    }
+
+    public IdentifiedSurvey(SurveyEntity s)
+        : this(s.Id, s.Title, s.Description, s.CreationDate, s.CloseDate, s.IsChangable, s.IsActive, s.OwnerId)
+    {
+    }
+
+    public int Id { get; }
+}
+````
+##### IdentifiedUser
+````c#
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.Models;
+
+public class IdentifiedUser : User, IHasId
+{
+    public IdentifiedUser(int id, string firstName, string lastName, string email, string? phoneNumber, string password,
+        bool isAdmin, string? description, int? age, string? gender, string? company)
+        : base(firstName, lastName, email, phoneNumber, password, isAdmin, description, age, gender, company)
+    {
+        Id = id;
+    }
+
+    public IdentifiedUser(UserEntity u) : this(u.Id, u.FirstName, u.LastName, u.Email, u.PhoneNumber, u.Password,
+        u.IsAdmin, u.Description, u.Age, u.Gender, u.Company)
+    {
+    }
+
+    public int Id { get; }
+}
+````
+##### Інтерфейс IHasId
+````c#
+namespace RestApiLab6.Models;
+
+public interface IHasId
+{
+    int Id { get; }
+}
+````
+#### SurveyDbContext
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.Configurations;
+using RestApiLab6.Entities;
+
+namespace RestApiLab6.MyDbContext;
+
+public class SurveyDbContext : DbContext
+{
+    public SurveyDbContext(DbContextOptions<SurveyDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<UserEntity> Users { get; set; }
+    public DbSet<CategoryEntity> Categories { get; set; }
+    public DbSet<ExpertiseEntity> Expertises { get; set; }
+    public DbSet<SurveyEntity> Surveys { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new ExpertiseConfiguration());
+        modelBuilder.ApplyConfiguration(new SurveyConfiguration());
+
+        base.OnModelCreating(modelBuilder);
+    }
+}
+````
+#### Repositories
+##### CategoryRepository
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.Entities;
+using RestApiLab6.Models;
+using RestApiLab6.MyDbContext;
+
+namespace RestApiLab6.Repositories;
+
+public class CategoryRepository
+{
+    private SurveyDbContext _dbContext;
+
+    public CategoryRepository(SurveyDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<List<IdentifiedCategory>> GetAll()
+    {
+        var categories = await _dbContext.Categories
+            .Select(c => new IdentifiedCategory(c))
+            .ToListAsync();
+
+        return categories;
+    }
+
+    public async Task<IdentifiedCategory> Get(int id)
+    {
+        var category = await _dbContext.Categories.FindAsync(id);
+
+        if (category is null)
+            throw new NullReferenceException($"Category with id {id} could not be found");
+
+        return new IdentifiedCategory(category);
+    }
+
+    public async Task<IdentifiedCategory> Add(Category category)
+    {
+        if (await _dbContext.Categories.AnyAsync(c => c.Name == category.Name))
+            throw new Exception($"Category with name {category.Name} already exists");
+
+        var categoryEntity = new CategoryEntity()
+        {
+            Name = category.Name,
+            ParentId = category.ParentId
+        };
+
+        await _dbContext.Categories.AddAsync(categoryEntity);
+        await _dbContext.SaveChangesAsync();
+
+        return new IdentifiedCategory(categoryEntity);
+    }
+
+    public async Task UpdateName(int id, string name)
+    {
+        if (await _dbContext.Categories.AnyAsync(c => c.Name == name))
+            throw new Exception($"Category with name {name} already exists");
+
+        await _dbContext.Categories.Where(c => c.Id == id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(c => c.Name, name));
+    }
+
+    public async Task Delete(int id)
+    {
+        await _dbContext.Categories
+            .Where(c => c.Id == id)
+            .ExecuteDeleteAsync();
+    }
+}
+````
+#### ExpertiseRepository
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.Entities;
+using RestApiLab6.Models;
+using RestApiLab6.MyDbContext;
+
+namespace RestApiLab6.Repositories;
+
+public class ExpertiseRepository
+{
+    private SurveyDbContext _dbContext;
+
+    public ExpertiseRepository(SurveyDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<List<IdentifiedExpertise>> GetAllByUser(int userId)
+    {
+        return await _dbContext.Expertises
+            .Where(e => e.UserId == userId)
+            .Select(e => new IdentifiedExpertise(e))
+            .ToListAsync();
+    }
+
+    public async Task<IdentifiedExpertise> Get(int id)
+    {
+        var expertise = await _dbContext.Expertises.FindAsync(id);
+
+        if (expertise == null)
+            throw new Exception($"Expertise with id {id} not found");
+
+        return new IdentifiedExpertise(expertise);
+    }
+
+    public async Task<IdentifiedExpertise> Add(Expertise expertise)
+    {
+        bool isExist = await _dbContext.Expertises
+            .AnyAsync(e =>
+                e.UserId == expertise.UserId
+                && e.CategoryId == expertise.CategoryId);
+
+        if (isExist)
+            throw new Exception("Expertise already exists");
+
+        var createdExpertise = new ExpertiseEntity()
+        {
+            ExpertiseRate = expertise.ExpertiseRate,
+            CategoryId = expertise.CategoryId,
+            UserId = expertise.UserId
+        };
+
+        await _dbContext.Expertises.AddAsync(createdExpertise);
+        await _dbContext.SaveChangesAsync();
+
+        return new IdentifiedExpertise(createdExpertise);
+    }
+
+    public async Task UpdateRate(int id, double rate)
+    {
+        await _dbContext.Expertises
+            .Where(e => e.Id == id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(e => e.ExpertiseRate, rate));
+    }
+
+    public async Task Delete(int id)
+    {
+        await _dbContext.Expertises.Where(e => e.Id == id)
+            .ExecuteDeleteAsync();
+    }
+}
+````
+##### SurveyRepository
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.Entities;
+using RestApiLab6.Models;
+using RestApiLab6.MyDbContext;
+
+namespace RestApiLab6.Repositories;
+
+public class SurveyRepository
+{
+    private SurveyDbContext _dbContext;
+
+    public SurveyRepository(SurveyDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<List<IdentifiedSurvey>> GetAllByOwner(int ownerId)
+    {
+        return await _dbContext.Surveys
+            .Where(s => s.OwnerId == ownerId)
+            .Select(s => new IdentifiedSurvey(s))
+            .ToListAsync();
+    }
+
+    public async Task<List<IdentifiedSurvey>> GetAllWithTitlePart(string titlePart)
+    {
+        return await _dbContext.Surveys
+            .Where(s => s.Title.Contains(titlePart))
+            .Select(s => new IdentifiedSurvey(s))
+            .ToListAsync();
+    }
+
+    public async Task<Survey> GetById(int id)
+    {
+        var survey = await _dbContext.Surveys.FindAsync(id);
+        if (survey is null)
+            throw new Exception($"Survey with id {id} not found");
+
+        return new IdentifiedSurvey(survey);
+    }
+
+    public async Task<IdentifiedSurvey> Add(Survey survey)
+    {
+        var createdSurvey = new SurveyEntity()
+        {
+            Title = survey.Title,
+            Description = survey.Description,
+            CreationDate = survey.CreationDate,
+            CloseDate = survey.CloseDate,
+            IsChangable = survey.IsChangable,
+            IsActive = survey.IsActive,
+            OwnerId = survey.OwnerId
+        };
+
+        await _dbContext.Surveys.AddAsync(createdSurvey);
+        await _dbContext.SaveChangesAsync();
+
+        return new IdentifiedSurvey(createdSurvey);
+    }
+
+    public async Task UpdateTitle(int id, string title)
+    {
+        await _dbContext.Surveys
+            .Where(s => s.Id == id)
+            .ExecuteUpdateAsync(sp => sp
+                .SetProperty(s => s.Title, title));
+    }
+
+    public async Task UpdateDescription(int id, string description)
+    {
+        await _dbContext.Surveys
+            .Where(s => s.Id == id)
+            .ExecuteUpdateAsync(sp => sp
+                .SetProperty(s => s.Description, description));
+    }
+
+    public async Task UpdateActivity(int id, bool isActive)
+    {
+        await _dbContext.Surveys
+            .Where(s => s.Id == id)
+            .ExecuteUpdateAsync(sp => sp
+                .SetProperty(s => s.IsActive, isActive));
+    }
+
+    public async Task Delete(int id)
+    {
+        await _dbContext.Surveys
+            .Where(s => s.Id == id)
+            .ExecuteDeleteAsync();
+    }
+}
+````
+##### UserRepository
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.Entities;
+using RestApiLab6.Models;
+using RestApiLab6.MyDbContext;
+
+namespace RestApiLab6.Repositories;
+
+public class UserRepository
+{
+    private SurveyDbContext _dbContext;
+
+    public UserRepository(SurveyDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public async Task<List<IdentifiedUser>> GetAll()
+    {
+        return await _dbContext.Users
+            .Select(u => new IdentifiedUser(u))
+            .ToListAsync();
+    }
+
+    public async Task<IdentifiedUser> Get(int id)
+    {
+        var user = await _dbContext.Users
+            .FindAsync(id);
+
+        if (user is null)
+            throw new Exception($"User with id {id} not found");
+
+        return new IdentifiedUser(user);
+    }
+
+    public async Task<IdentifiedUser> Create(User user)
+    {
+        if (await _dbContext.Users.AnyAsync(u => u.Email == user.Email))
+            throw new Exception($"Email {user.Email} already taken");
+
+        var phone = user.PhoneNumber;
+
+        if (!string.IsNullOrWhiteSpace(phone))
+        {
+            if (await _dbContext.Users.AnyAsync(u => u.PhoneNumber == phone))
+                throw new Exception($"PhoneNumber {user.PhoneNumber} already taken");
+        }
+
+        var userEntity = new UserEntity()
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            Password = user.Password,
+            IsAdmin = user.IsAdmin,
+            Description = user.Description,
+            Age = user.Age
+        };
+
+        await _dbContext.Users.AddAsync(userEntity);
+        await _dbContext.SaveChangesAsync();
+
+        var created = new IdentifiedUser(userEntity);
+
+        return created;
+    }
+
+    public async Task UpdatePhoneNumber(int id, string phoneNumber)
+    {
+        if (await _dbContext.Users.AnyAsync(u => u.PhoneNumber == phoneNumber))
+            throw new Exception($"PhoneNumber {phoneNumber} already taken");
+
+        var user = await _dbContext.Users.FindAsync(id);
+
+        if (user is null)
+            throw new Exception($"User with id {id} not found");
+
+        user.PhoneNumber = phoneNumber;
+    }
+
+    public async Task UpdatePassword(int id, string password)
+    {
+        await _dbContext.Users
+            .Where(u => u.Id == id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(u => u.Password, password));
+    }
+
+    public async Task Delete(int id)
+    {
+        await _dbContext.Users
+            .Where(u => u.Id == id)
+            .ExecuteDeleteAsync();
+    }
+}
+````
+
+#### Controllers
+##### CategoryController
+````c#
+using Microsoft.AspNetCore.Mvc;
+using RestApiLab6.Models;
+using RestApiLab6.Repositories;
+
+namespace RestApiLab6.Controllers;
+
+[ApiController]
+public class CategoryController : ControllerBase
+{
+    private CategoryRepository _categoryRepo;
+
+    public CategoryController(CategoryRepository categoryRepo)
+    {
+        _categoryRepo = categoryRepo;
+    }
+
+    [HttpGet]
+    [Route("categories")]
+    public async Task<ActionResult<List<IdentifiedCategory>>> GetCategories()
+    {
+        try
+        {
+            var categories = await _categoryRepo.GetAll();
+            return Ok(categories);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("categories/{id}")]
+    public async Task<ActionResult<IdentifiedCategory>> GetCategory(int id)
+    {
+        try
+        {
+            var category = await _categoryRepo.Get(id);
+            return Ok(category);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost]
+    [Route("categories")]
+    public async Task<ActionResult<List<IdentifiedCategory>>> CreateCategory([FromBody] Category category)
+    {
+        try
+        {
+            var created = await _categoryRepo.Add(category);
+            return Created($"/categories/{created.Id}", created);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("categories/{id}")]
+    public async Task<ActionResult> UpdateCategoryName(int id, string name)
+    {
+        try
+        {
+            await _categoryRepo.UpdateName(id, name);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete]
+    [Route("categories/{id}")]
+    public async Task<ActionResult> DeleteCategory(int id)
+    {
+        try
+        {
+            await _categoryRepo.Delete(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+}
+````
+##### ExpertiseController
+````c#
+using Microsoft.AspNetCore.Mvc;
+using RestApiLab6.Models;
+using RestApiLab6.Repositories;
+
+namespace RestApiLab6.Controllers;
+
+[ApiController]
+public class ExpertiseController : ControllerBase
+{
+    private ExpertiseRepository _expertiseRepository;
+
+    public ExpertiseController(ExpertiseRepository expertiseRepository)
+    {
+        _expertiseRepository = expertiseRepository;
+    }
+
+    [HttpGet]
+    [Route("expertises/user/{userId}")]
+    public async Task<ActionResult<List<IdentifiedExpertise>>> GetExpertisesByUser(int userId)
+    {
+        try
+        {
+            var expertises = await _expertiseRepository.GetAllByUser(userId);
+            return Ok(expertises);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("expertises/{id}")]
+    public async Task<ActionResult<IdentifiedExpertise>> GetExpertiseById(int id)
+    {
+        try
+        {
+            var expertise = await _expertiseRepository.Get(id);
+            return Ok(expertise);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost]
+    [Route("expertises")]
+    public async Task<ActionResult<IdentifiedExpertise>> CreateExpertise(Expertise expertise)
+    {
+        try
+        {
+            var created = await _expertiseRepository.Add(expertise);
+            return Created($"/expertises/{created.Id}", created);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("expertises/{id}")]
+    public async Task<ActionResult> UpdateExpertiseRate(int id, double rate)
+    {
+        try
+        {
+            await _expertiseRepository.UpdateRate(id, rate);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete]
+    [Route("expertises/{id}")]
+    public async Task<ActionResult> DeleteExpertise(int id)
+    {
+        try
+        {
+            await _expertiseRepository.Delete(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+}
+````
+##### SurveyController
+````c#
+using Microsoft.AspNetCore.Mvc;
+using RestApiLab6.Models;
+using RestApiLab6.Repositories;
+
+namespace RestApiLab6.Controllers;
+
+[ApiController]
+public class SurveyController : ControllerBase
+{
+    private SurveyRepository _surveyRepository;
+
+    public SurveyController(SurveyRepository surveyRepository)
+    {
+        _surveyRepository = surveyRepository;
+    }
+
+    [HttpGet]
+    [Route("surveys/owner/{ownerId}")]
+    public async Task<ActionResult<List<IdentifiedSurvey>>> GetSurveysByOwner(int ownerId)
+    {
+        try
+        {
+            var surveys = await _surveyRepository.GetAllByOwner(ownerId);
+            return Ok(surveys);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("surveys/{titlePart:alpha}")]
+    public async Task<ActionResult<List<IdentifiedSurvey>>> GetSurveysByTitlePart(string titlePart)
+    {
+        try
+        {
+            var surveys = await _surveyRepository.GetAllWithTitlePart(titlePart);
+            return Ok(surveys);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("surveys/{id:int}")]
+    public async Task<ActionResult<IdentifiedSurvey>> GetSurveyById(int id)
+    {
+        try
+        {
+            var survey = await _surveyRepository.GetById(id);
+            return Ok(survey);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost]
+    [Route("surveys")]
+    public async Task<ActionResult<IdentifiedSurvey>> CreateSurvey(Survey survey)
+    {
+        try
+        {
+            var created = await _surveyRepository.Add(survey);
+            return Created($"/surveys/{created.Id}", created);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("surveys/update/title")]
+    public async Task<ActionResult> UpdateSurveyTitle(int id, string title)
+    {
+        try
+        {
+            await _surveyRepository.UpdateTitle(id, title);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("surveys/update/description")]
+    public async Task<ActionResult> UpdateSurveyDescription(int id, string description)
+    {
+        try
+        {
+            await _surveyRepository.UpdateDescription(id, description);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("surveys/update/activity")]
+    public async Task<ActionResult> UpdateSurveyActivity(int id, bool isActive)
+    {
+        try
+        {
+            await _surveyRepository.UpdateActivity(id, isActive);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete]
+    [Route("surveys/delete/{id:int}")]
+    public async Task<ActionResult> DeleteSurvey(int id)
+    {
+        try
+        {
+            await _surveyRepository.Delete(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+}
+````
+##### UserController
+````c#
+using Microsoft.AspNetCore.Mvc;
+using RestApiLab6.Models;
+using RestApiLab6.Repositories;
+
+namespace RestApiLab6.Controllers;
+
+[ApiController]
+public class UserController : ControllerBase
+{
+    private UserRepository _userRepository;
+
+    public UserController(UserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
+
+    [HttpGet]
+    [Route("users")]
+    public async Task<ActionResult<List<IdentifiedUser>>> GetUsers()
+    {
+        try
+        {
+            var users = await _userRepository.GetAll();
+            return Ok(users);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet]
+    [Route("users/{id}")]
+    public async Task<ActionResult<IdentifiedUser>> GetUser(int id)
+    {
+        try
+        {
+            var user = await _userRepository.Get(id);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost]
+    [Route("users")]
+    public async Task<ActionResult<IdentifiedUser>> CreateUser(User user)
+    {
+        try
+        {
+            var created = await _userRepository.Create(user);
+            return Created($"/users/{created.Id}", created);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("users/{id}")]
+    public async Task<ActionResult> UpdatePhoneNumber(int id, string phoneNumber)
+    {
+        try
+        {
+            await _userRepository.UpdatePhoneNumber(id, phoneNumber);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("users/update/{id}")]
+    public async Task<ActionResult> UpdatePassword(int id, string password)
+    {
+        try
+        {
+            await _userRepository.UpdatePassword(id, password);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpDelete]
+    [Route("users/{id}")]
+    public async Task<ActionResult> DeleteUser(int id)
+    {
+        try
+        {
+            await _userRepository.Delete(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+}
+````
+#### Program.cs
+````c#
+using Microsoft.EntityFrameworkCore;
+using RestApiLab6.MyDbContext;
+using RestApiLab6.Repositories;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SurveyDbContext>(options =>
+{
+    options.UseMySQL(builder.Configuration.GetConnectionString("DbConnection"));
+});
+builder.Services.AddControllers();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ExpertiseRepository>();
+builder.Services.AddScoped<CategoryRepository>();
+builder.Services.AddScoped<UserRepository>();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddProblemDetails();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseStatusCodePages();
+app.UseHttpsRedirection();
+app.MapControllers();
+
+app.Run();
+````
+
+#### Файли конфігурації
+##### appsettings.json
+````json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+````
+
+##### appsettings.Development.json
+````json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+      "DbConnection": "Server=localhost; Port=3306; Database=Survey; User Id=root; Password=12345678"
+  }
+}
+````
+##### launchSettings.json
+````json
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5100",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7239;http://localhost:5100",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+````
+#### Під'єднання до бази даних
+```json
+"DbConnection": "Server=localhost;Port=3306;Database=lab6;User Id=root;Password=12345678"
+```
