@@ -1,6 +1,6 @@
 # Виконав
 
-*студент 2-го курсу, групи ІМ-31* **Зінець Максим** Telegram: [@kate_pril](https://t.me/kate_pril)
+*студент 2-го курсу, групи ІМ-31* **Зінець Максим** Telegram: [@general_maks](https://t.me/general_maks)
 
 # Керівник
 
