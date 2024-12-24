@@ -17,7 +17,7 @@
 ![image](https://github.com/user-attachments/assets/53c3c3f8-06af-4500-8b26-78373865fcad)
 #### Друга категорія
 ![image](https://github.com/user-attachments/assets/0ff9538a-2b1c-4861-9237-16954b2f0104)
-![image](https://github.com/user-attachments/assets/4fe59c59-1bcc-4c40-84d5-fc1128dbd5e7)
+![image](https://github.com/user-attachments/assets/4fe59c59-1bcc-4c40-84d5-fc1128dbd5e7) 
 ### Створемо опитування
 ![image](https://github.com/user-attachments/assets/fb7cc591-6343-4d3e-a1a8-ed3f67fda56f)
 ![image](https://github.com/user-attachments/assets/932cb905-61d1-4706-b9b4-241f3a13e262)
